@@ -1,9 +1,10 @@
 import React from 'react';
+import logo from '../../assets/taati.png'
 
 const Logo = () => {
     return (
         <div>
-            <h1>Taati</h1>
+            <img src={logo} alt="" className='max-w-[90px]' />
         </div>
     );
 };

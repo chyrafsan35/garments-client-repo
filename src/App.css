@@ -1,5 +1,17 @@
 @import "tailwindcss";
-@plugin "daisyui";
+ @plugin "daisyui" {
+  themes: light --default;
+ };
+
+ @plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #0A2A43;
+  --color-hover1: #09324E;
+  --color-secondary: #28C7DB;
+  --color-hover2: #1FA7B8;
+  --color-text: #FFFFFF;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
