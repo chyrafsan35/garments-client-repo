@@ -7,7 +7,7 @@ const Workflow = () => {
     console.log(steps);
 
     return (
-        <div className='py-[50px]'>
+        <div className='py-[50px] text-[#1A1A1A]'>
             <h2 className='text-center py-4 font-semibold text-xl'>How It Works</h2>
             <div className='flex justify-center items-center gap-4 flex-col md:flex-row'>
                 {

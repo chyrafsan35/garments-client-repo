@@ -1,21 +1,25 @@
 [
   {
     "step": 1,
+    "image": "../src/assets/order.png",
     "title": "Receive Orders",
     "description": "Add and manage incoming orders from buyers, including product details, quantities, and deadlines."
   },
   {
     "step": 2,
+    "image": "../src/assets/planning.png",
     "title": "Plan Production",
     "description": "Organize production workflow by assigning tasks for cutting, sewing, and finishing stages."
   },
   {
     "step": 3,
+    "image": "../src/assets/progress.png",
     "title": "Track Progress",
     "description": "Monitor the status of each production stage in real-time and ensure timely completion."
   },
   {
     "step": 4,
+    "image": "../src/assets/on-time.png",
     "title": "Deliver on Time",
     "description": "Ensure that finished orders are ready for dispatch and delivered according to schedule."
   }
