@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from './Banner';
 import Workflow from '../Workflow/Workflow';
+import Feedbacks from '../Feedbacks/Feedbacks';
 
 const Home = () => {
     return (
@@ -8,6 +9,7 @@ const Home = () => {
             <div className='max-w-[1440px] mx-auto'>
                 <Banner></Banner>
                 <Workflow></Workflow>
+                <Feedbacks></Feedbacks>
             </div>
         </div>
     );

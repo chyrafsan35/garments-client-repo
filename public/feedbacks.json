@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "username": "Alice Johnson",
+    "useremail": "alice.johnson@example.com",
+    "ratings": 5,
+    "review": "Excellent service and top-quality garments! Highly recommended.",
+    "date": "2025-12-01"
+  },
+  {
+    "id": 2,
+    "username": "Brian Smith",
+    "useremail": "brian.smith@example.com",
+    "ratings": 4,
+    "review": "Good quality products, but delivery took a bit longer than expected.",
+    "date": "2025-12-02"
+  },
+  {
+    "id": 3,
+    "username": "Catherine Lee",
+    "useremail": "catherine.lee@example.com",
+    "ratings": 5,
+    "review": "Amazing experience! The tracking system made everything so easy.",
+    "date": "2025-12-03"
+  },
+  {
+    "id": 4,
+    "username": "David Kim",
+    "useremail": "david.kim@example.com",
+    "ratings": 3,
+    "review": "Products are decent, but customer support could be improved.",
+    "date": "2025-12-04"
+  },
+  {
+    "id": 5,
+    "username": "Emily Davis",
+    "useremail": "emily.davis@example.com",
+    "ratings": 4,
+    "review": "Good experience overall. Will order again from them.",
+    "date": "2025-12-05"
+  },
+  {
+    "id": 6,
+    "username": "Frank Wilson",
+    "useremail": "frank.wilson@example.com",
+    "ratings": 5,
+    "review": "The garments are exactly as described. Very satisfied!",
+    "date": "2025-12-06"
+  },
+  {
+    "id": 7,
+    "username": "Grace Chen",
+    "useremail": "grace.chen@example.com",
+    "ratings": 4,
+    "review": "Smooth ordering process and good quality materials.",
+    "date": "2025-12-07"
+  },
+  {
+    "id": 8,
+    "username": "Henry Thompson",
+    "useremail": "henry.thompson@example.com",
+    "ratings": 5,
+    "review": "Fast delivery and excellent customer support. Loved it!",
+    "date": "2025-12-08"
+  }
+]
