@@ -1,13 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hook/useAuth';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import axios from 'axios';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { registerUser, updateUserProfile } = useAuth()
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handleForms = (data) => {
         const profileImg = data.photo[0];
@@ -32,6 +34,7 @@ const Register = () => {
                     updateUserProfile(userProfile)
                     .then( res => {
                         console.log('User added', res)
+                        navigate(location?.state || '/')
                     })
                     .catch(error => {
                         console.log(error)
@@ -49,7 +52,7 @@ const Register = () => {
                 <form className='card-body' onSubmit={handleSubmit(handleForms)}>
                     <fieldset className="fieldset">
                         <label className="label">Name</label>
-                        <input type="name" {...register("email", { required: true })} className="input" placeholder="Name" />
+                        <input type="name" {...register("name", { required: true })} className="input" placeholder="Name" />
                         {errors.name?.type === 'required' && <p className='text-red-500'>Name is required</p>}
                         
                         <label className="label">Photo</label>
@@ -69,7 +72,7 @@ const Register = () => {
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button className="btn bg-primary hover:bg-[#0f4c75] text-white mt-4">Register</button>
                     </fieldset>
-                    <p>Already have an account? <Link className='text-primary underline' to={'/login'}>Login</Link></p>
+                    <p>Already have an account? <Link className='text-primary underline' state={location.state} to={'/login'}>Login</Link></p>
                 </form>
                 <SocialLogin></SocialLogin>
             </div>

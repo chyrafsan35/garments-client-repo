@@ -1,13 +1,17 @@
 import React from 'react';
 import useAuth from '../../../hook/useAuth';
+import { useLocation, useNavigate } from 'react-router';
 
 const SocialLogin = () => {
     const { signInWithGoogle } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handleGoogleSignIn = () => {
         signInWithGoogle()
         .then(result => {
             console.log(result)
+            navigate(location?.state || '/')
         })
         .catch(error=> {
             console.log(error)
