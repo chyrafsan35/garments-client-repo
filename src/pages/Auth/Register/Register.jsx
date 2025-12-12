@@ -20,9 +20,17 @@ const Register = () => {
 
     return (
         <div>
-            <div className='max-w-sm w-full card shrink-0 shadow-2xl bg-base-100 mx-auto rounded-sm'>
+            <div className='max-w-sm w-full card shrink-0 shadow-2xl bg-base-100 mx-auto rounded-sm mb-12'>
                 <form className='card-body' onSubmit={handleSubmit(handleForms)}>
                     <fieldset className="fieldset">
+                        <label className="label">Name</label>
+                        <input type="name" {...register("email", { required: true })} className="input" placeholder="Name" />
+                        {errors.name?.type === 'required' && <p className='text-red-500'>Name is required</p>}
+                        
+                        <label className="label">Photo</label>
+                        <input type="file" {...register("file", { required: true })} className="file-input file-input-primary" placeholder="Your Photo" />
+                        {errors.file?.type === 'required' && <p className='text-red-500'>Photo is required</p>}
+                        
                         <label className="label">Email</label>
                         <input type="email" {...register("email", { required: true })} className="input" placeholder="Email" />
                         {errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>}
