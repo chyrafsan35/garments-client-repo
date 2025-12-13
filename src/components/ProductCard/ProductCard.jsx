@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const ProductCard = ({ card }) => {
+
     return (
         <div className="card bg-primary text-white w-96 shadow-sm mx-auto my-5">
             <figure>
