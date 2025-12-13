@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hook/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import axios from 'axios';
+import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { registerUser, updateUserProfile } = useAuth()
     const location = useLocation();
     const navigate = useNavigate();
+    const [toggle, setToggle] = useState(true);
+
+    const handleToggle = ()=> {
+        setToggle(!toggle);
+    }
 
     const handleForms = (data) => {
         const profileImg = data.photo[0];
@@ -64,7 +70,14 @@ const Register = () => {
                         {errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>}
 
                         <label className="label">Password</label>
-                        <input type="password" {...register("password", { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z]).+$/ })} className="input" placeholder="Password" />
+                        <div>
+                            {
+                                toggle ? 
+                                <><input type="password" {...register("password", { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z]).+$/ })} className="input relative" placeholder="Password" /><FaEye onClick={handleToggle} className='absolute right-12 top-[50%] cursor-pointer'/></>
+                                :
+                                <><input type="text" {...register("password", { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z]).+$/ })} className="input relative" placeholder="Password" /><FaEyeSlash onClick={handleToggle} className='absolute right-12 top-[50%] cursor-pointer'/></>
+                            }
+                        </div>
                         {errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>}
                         {errors.password?.type === 'minLength' && <p className='text-red-500'>Password must be at least 6 characters or longer</p>}
                         {errors.password?.type === 'pattern' && <p className='text-red-500'>Password must have at least one uppercase and one lowercase letter</p>}

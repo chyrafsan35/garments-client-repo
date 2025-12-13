@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../hook/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signInUser } = useAuth()
     const location = useLocation();
     const navigate = useNavigate();
+    const [toggle, setToggle] = useState(true);
+
+    const handleToggle = () => {
+        setToggle(!toggle);
+    }
 
     const handleLogin = (data) => {
         signInUser(data.email, data.password)
@@ -31,7 +37,14 @@ const Login = () => {
                         {errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>}
 
                         <label className="label">Password</label>
-                        <input type="password" {...register("password", { required: true })} className="input" placeholder="Password" />
+                        <div>
+                            {
+                                toggle ?
+                                    <><input type="password" {...register("password", { required: true })} className="input relative" placeholder="Password" /><FaEye onClick={handleToggle} className='absolute right-12 top-[50%] cursor-pointer'/></>
+                                    :
+                                    <><input type="text" {...register("password", { required: true })} className="input relative" placeholder="Password" /><FaEyeSlash onClick={handleToggle} className='absolute right-12 top-[50%] cursor-pointer'/></>
+                            }
+                        </div>
                         {errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>}
 
                         <div><a className="link link-hover">Forgot password?</a></div>
