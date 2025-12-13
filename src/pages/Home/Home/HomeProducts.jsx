@@ -1,0 +1,30 @@
+import React from 'react';
+import axiosSecure from '../../../hook/axiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import ProductCard from '../../../components/ProductCard/ProductCard';
+
+const HomeProducts = () => {
+
+    const useAxiosSecure = axiosSecure();
+
+    const { data : products = [] } = useQuery({
+        queryKey: ['products'],
+        queryFn: async()=>{
+            const res = await useAxiosSecure.get('/products');
+            console.log('they are', products)
+            return res.data;
+        }
+    })
+    return (
+        <div className='py-[50px] text-[#1A1A1A]'>
+            <h2 className='text-center py-4 font-semibold text-xl'>Our Products</h2>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-2 mx-auto'>
+                {
+                    products.map(card => <ProductCard key={card.id} card={card}></ProductCard>)
+                }
+            </div>
+        </div>
+    );
+};
+
+export default HomeProducts;
