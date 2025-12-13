@@ -22,4 +22,5 @@ body {
 
 a.active {
   color: #0A2A43;
+  text-decoration: underline;
 }

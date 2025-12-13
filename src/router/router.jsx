@@ -4,6 +4,7 @@ import Rootlayout from "../layouts/Rootlayout";
 import Authlayout from "../layouts/Authlayout";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
+import AllProducts from "../pages/Shared/AllProducts/AllProducts";
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,11 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-      }
+      },
+      {
+        path: "all-product",
+        Component: AllProducts
+      },
     ]
   },
   {
@@ -27,7 +32,7 @@ export const router = createBrowserRouter([
       {
         path: "register",
         Component: Register
-      }
+      },
     ]
   }
 ]);
