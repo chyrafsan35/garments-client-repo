@@ -40,9 +40,9 @@ const Login = () => {
                         <div>
                             {
                                 toggle ?
-                                    <><input type="password" {...register("password", { required: true })} className="input relative" placeholder="Password" /><FaEye onClick={handleToggle} className='absolute right-12 top-[50%] cursor-pointer'/></>
-                                    :
-                                    <><input type="text" {...register("password", { required: true })} className="input relative" placeholder="Password" /><FaEyeSlash onClick={handleToggle} className='absolute right-12 top-[50%] cursor-pointer'/></>
+                                <><input type="password" {...register("password", { required: true })} className="input relative" placeholder="Password" /><FaEye onClick={handleToggle} className='absolute right-12 top-34 cursor-pointer'/></>
+                                :
+                                <><input type="text" {...register("password", { required: true })} className="input relative" placeholder="Password" /><FaEyeSlash onClick={handleToggle} className='absolute right-12 top-34 cursor-pointer'/></>
                             }
                         </div>
                         {errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>}
