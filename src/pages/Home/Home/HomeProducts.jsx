@@ -15,6 +15,7 @@ const HomeProducts = () => {
             return res.data;
         }
     })
+    
     return (
         <div className='py-[50px] text-[#1A1A1A]'>
             <h2 className='text-center py-4 font-semibold text-xl'>Our Products</h2>
