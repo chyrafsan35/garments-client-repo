@@ -15,14 +15,14 @@ const NavBar = () => {
     }
 
     const links = <>
-        <li><NavLink>Home</NavLink></li>
-        <li><NavLink>All-Product</NavLink></li>
+        <li><NavLink to={'/'}>Home</NavLink></li>
+        <li><NavLink to={'all-product'}>All-Product</NavLink></li>
         {
             user ?
-                <li><NavLink>Dashboard</NavLink></li> :
+                <li><NavLink to={'dashboard'}>Dashboard</NavLink></li> :
                 <>
-                    <li><NavLink>About Us</NavLink></li>
-                    <li><NavLink>Contact</NavLink></li>
+                    <li><NavLink to={'about-us'}>About Us</NavLink></li>
+                    <li><NavLink to={'contact'}>Contact</NavLink></li>
                     <li><NavLink to={'register'}>Register</NavLink></li>
                 </>
         }
