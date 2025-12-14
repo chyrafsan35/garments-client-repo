@@ -18,7 +18,7 @@ const ProductCard = ({ card }) => {
                 <p>{card.description}</p>
                 <div className="card-actions flex justify-center items-center">
                     <p className='font-semibold text-[15px]'>Price : {card.price}tk</p>
-                    <Link className='btn bg-[#28C7DB] hover:bg-[#1fa7b8] border-0 text-white'>View Details</Link>
+                    <Link to={'product-details'} className='btn bg-[#28C7DB] hover:bg-[#1fa7b8] border-0 text-white'>View Details</Link>
                 </div>
             </div>
         </div>
