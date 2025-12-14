@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
         Component: AllProducts
       },
       {
-        path: "product-details",
+        path: "/product/:id",
         element: <PrivateRoute>
           <ProductDetails></ProductDetails>
         </PrivateRoute>
