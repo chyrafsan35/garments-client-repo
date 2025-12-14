@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hook/useAuth';
 import { useLocation } from 'react-router';
+import axiosSecure from '../../hook/axiosSecure';
 
 const Order = () => {
 
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
     const { user } = useAuth();
     const location = useLocation();
     const { product } = location.state || {};
@@ -13,6 +14,9 @@ const Order = () => {
     const [amount, setAmount] = useState(product.price);
 
     const unitPrice = Number(product.price);
+
+    const useAxios = axiosSecure();
+
 
     const add = () => {
         if (quantity < product.availableQuantity) {
@@ -45,6 +49,10 @@ const Order = () => {
 
     const handleOrder = data => {
         console.log(data)
+        useAxios.post('/myOrders', data)
+        .then(res=>{
+            console.log('After adding', res.data)
+        })
     }
 
     return (
