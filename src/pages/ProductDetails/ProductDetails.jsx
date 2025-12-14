@@ -1,7 +1,7 @@
 import React from 'react';
 import axiosSecure from '../../hook/axiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import Loading from '../../components/Loading/Loading';
 
 const ProductDetails = () => {
@@ -52,13 +52,15 @@ const ProductDetails = () => {
                                 </p>
 
                                 <div className="border-t pt-4 space-y-2 text-sm text-gray-700">
-                                    <p><strong>Available Quantity:</strong>{info.availableQuantity}</p>
-                                    <p><strong>Minimum Order:</strong> 1</p>
+                                    <p><strong>Available Quantity:</strong> {info.availableQuantity}</p>
+                                    <p><strong>Minimum Order:</strong> {info.minQuantity}</p>
                                 </div>
 
-                                <button className="mt-4 px-8 py-3 bg-primary text-white rounded-lg text-lg hover:bg-[#09324E] transition btn border-0">
-                                    Order Now
-                                </button>
+                                <Link to={'/order'} state={ {product : info} }>
+                                    <button className="mt-4 px-8 py-3 bg-primary text-white rounded-lg text-lg hover:bg-[#09324E] transition btn border-0">
+                                        Order Now
+                                    </button>
+                                </Link>
                             </div>
 
                         </div>

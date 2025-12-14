@@ -7,6 +7,7 @@ import Register from "../pages/Auth/Register/Register";
 import AllProducts from "../pages/Shared/AllProducts/AllProducts";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import PrivateRoute from "./PrivateRoute";
+import Order from "../pages/Order/Order";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,12 @@ export const router = createBrowserRouter([
         path: "/product/:id",
         element: <PrivateRoute>
           <ProductDetails></ProductDetails>
+        </PrivateRoute>
+      },
+      {
+        path: "/order",
+        element: <PrivateRoute>
+          <Order></Order>
         </PrivateRoute>
       },
     ]
