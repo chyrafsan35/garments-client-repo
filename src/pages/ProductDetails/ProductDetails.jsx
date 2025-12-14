@@ -38,7 +38,7 @@ const ProductDetails = () => {
 
                             {/* Details Section */}
                             <div className="space-y-4">
-                                <span className="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">
+                                <span className="inline-block bg-secondary/30 text-primary px-3 py-1 rounded-full text-sm">
                                     {info.category}
                                 </span>
 
