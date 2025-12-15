@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import useAuth from '../../hook/useAuth';
 import { useLocation } from 'react-router';
 import axiosSecure from '../../hook/axiosSecure';
+import Swal from 'sweetalert2';
 
 const Order = () => {
 
@@ -45,14 +46,17 @@ const Order = () => {
         }
     }
 
-
-
     const handleOrder = data => {
         console.log(data)
-        useAxios.post('/myOrders', data)
-        .then(res=>{
-            console.log('After adding', res.data)
-        })
+        useAxios.post('/my-orders', data)
+            .then(res => {
+                Swal.fire({
+                    title: "Order Booked",
+                    icon: "success",
+                    draggable: true
+                });
+                console.log('After adding', res.data)
+            })
     }
 
     return (
