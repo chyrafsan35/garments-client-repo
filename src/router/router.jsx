@@ -8,6 +8,9 @@ import AllProducts from "../pages/Shared/AllProducts/AllProducts";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import PrivateRoute from "./PrivateRoute";
 import Order from "../pages/Order/Order";
+import DashboardLayout from "../layouts/DashboardLayout";
+import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +51,22 @@ export const router = createBrowserRouter([
         path: "register",
         Component: Register
       },
+    ]
+  },
+  {
+    path: 'dashboard',
+    element: <PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>,
+    children: [
+      {
+        path: 'my-orders',
+        Component: MyOrders
+      },
+      {
+        path: 'payment/:id',
+        Component: Payment
+      }
     ]
   }
 ]);
