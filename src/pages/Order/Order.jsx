@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hook/useAuth';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import axiosSecure from '../../hook/axiosSecure';
 import Swal from 'sweetalert2';
 
@@ -13,6 +13,7 @@ const Order = () => {
     const { product } = location.state || {};
     const [quantity, setQuantity] = useState(product.minQuantity);
     const [amount, setAmount] = useState(product.price);
+    const navigate = useNavigate();
 
     const unitPrice = Number(product.price);
 
@@ -50,8 +51,9 @@ const Order = () => {
         console.log(data)
         useAxios.post('/my-orders', data)
             .then(res => {
+                navigate('/dashboard/my-orders');
                 Swal.fire({
-                    title: "Order Booked",
+                    title: "Order booked. Please pay.",
                     icon: "success",
                     draggable: true
                 });

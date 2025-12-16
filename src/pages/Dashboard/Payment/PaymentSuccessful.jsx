@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
+import axiosSecure from '../../../hook/axiosSecure';
 
 const PaymentSuccessful = () => {
+
+    const [searchParams] = useSearchParams();
+    const sessionId = searchParams.get('session_id');
+    console.log(sessionId)
+    const useAxios = axiosSecure();
+    const [paymentInfo, setPaymentInfo] = useState({})
+
+    useEffect(()=>{
+        if(sessionId){
+            useAxios.patch(`/payment-success?session_id=${sessionId}`)
+            .then(res=>{
+                console.log(res.data)
+                setPaymentInfo({
+                    transactionId : res.data.transactionId,
+                    trackingId : res.data.trackingId,
+                })
+            })
+        }
+    },[sessionId, useAxios])
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
             <div className="bg-white shadow-2xl rounded-2xl p-10 max-w-md w-full text-center">
@@ -14,6 +35,9 @@ const PaymentSuccessful = () => {
                 <h2 className="text-3xl font-bold text-primary mb-2">
                     Payment Successful!
                 </h2>
+
+                <p>Your transaction id - {paymentInfo.transactionId}</p>
+                <p>Your tracking id - {paymentInfo.trackingId}</p>
 
                 <p className="text-gray-600 mb-6">
                     Thank you for your purchase. Your order has been placed successfully.
@@ -28,7 +52,7 @@ const PaymentSuccessful = () => {
                         </button>
                     </Link>
 
-                    <Link to="/">
+                    <Link to="/all-product">
                         <button className="btn btn-outline w-full">
                             Continue Shopping
                         </button>
