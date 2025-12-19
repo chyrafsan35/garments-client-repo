@@ -20,6 +20,20 @@ const MyOrders = () => {
         }
     });
 
+    const handlePayment = async (order) => {
+        console.log(order);
+
+        const paymentInfo = {
+            cost: order.totalAmount,
+            productId: order._id,
+            productName: order.productTitle,
+            email: order.email
+        };
+
+        const res = await useAxios.post('/create-checkout-session', paymentInfo);
+        window.location.href = res.data.url;
+    };
+
     const handleOrderDelete = id => {
         console.log(id);
         Swal.fire({
@@ -78,10 +92,10 @@ const MyOrders = () => {
                                         <td></td>
                                         <td>
                                             {
-                                                order.paymentStatus ? 
-                                                <span>Paid</span>
-                                                :
-                                                <Link to={`/dashboard/payment/${order._id}`}><button className="btn btn-xm btn-primary">Pay</button></Link>
+                                                order.paymentStatus ?
+                                                    <span>Paid</span>
+                                                    :
+                                                    <button onClick={() => handlePayment(order)} className="btn btn-xm btn-primary">Pay</button>
                                             }
                                         </td>
                                         <td>
