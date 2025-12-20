@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React from 'react';
 import useAuth from '../../../hook/useAuth';
 import axiosSecure from '../../../hook/axiosSecure';
 import { useQuery } from '@tanstack/react-query';
@@ -6,45 +6,89 @@ import { useQuery } from '@tanstack/react-query';
 const MyProfile = () => {
     const { user } = useAuth();
     const useAxios = axiosSecure();
-    const { data: payments = [] } = useQuery({
-        queryKey: ['payments', user.email],
+
+    const { data: payments = [], isLoading } = useQuery({
+        queryKey: ['payments', user?.email],
+        enabled: !!user?.email,
         queryFn: async () => {
             const result = await useAxios.get(`/payments?email=${user.email}`);
             return result.data;
         }
-    })
+    });
+
     return (
-        <div>
-            <div className='p-5'>
-                <p>This is my profile</p>
-                <div className='mt-5'>
-                    <h2 className='text-xl text-primary mb-5'> Payment History  </h2>
-                    <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th> No </th>
-                                    <th>Name</th>
-                                    <th>Amount</th>
-                                    <th>Transaction ID</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    payments.map((payment, index) =>
-                                        <tr key={payment._id}>
-                                            <th>{index + 1}</th>
-                                            <td>{payment.productName}</td>
-                                            <td>{payment.amount}</td>
-                                            <td>{payment.transactionId}</td>
-                                        </tr>
-                                    )
-                                }
-                            </tbody>
-                        </table>
+        <div className="p-6 space-y-10">
+            <div className="card bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <div className="flex flex-col sm:flex-row items-center gap-6">
+                        <div className="avatar">
+                            <div className="w-28 rounded-full ring ring-primary ring-offset-base-100 ring-offset-4">
+                                <img src={user?.photoURL || 'https://i.ibb.co.com/Nd6LxX65/Pngtree-user-icon-5097430.png'} alt="profile" />
+                            </div>
+                        </div>
+
+                        <div className="text-center sm:text-left space-y-1">
+                            <h2 className="text-2xl font-semibold text-primary">
+                                {user?.displayName || 'No Name Found'}
+                            </h2>
+                            <p className="text-primary">{user?.email}</p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+            <div className="card bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="text-xl font-semibold text-primary mb-4">
+                        Payment History
+                    </h2>
+
+                    {
+                        isLoading ? (
+                            <p className="text-primary">Loading payment history...</p>
+                        ) : payments.length === 0 ? (
+                            <p className="text-primary text-center py-10">
+                                No payment records found
+                            </p>
+                        ) : (
+                            <div className="overflow-x-auto rounded-lg border border-primary/20">
+                                <table className="table">
+                                    <thead>
+                                        <tr className="text-primary">
+                                            <th>#</th>
+                                            <th>Product Name</th>
+                                            <th>Amount</th>
+                                            <th>Transaction ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            payments.map((payment, index) => (
+                                                <tr key={payment._id} className="hover">
+                                                    <td className="text-primary font-medium">
+                                                        {index + 1}
+                                                    </td>
+                                                    <td className="text-primary">
+                                                        {payment.productName}
+                                                    </td>
+                                                    <td className="text-primary font-semibold">
+                                                        ${payment.amount}
+                                                    </td>
+                                                    <td className="text-primary text-sm break-all">
+                                                        {payment.transactionId}
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+
         </div>
     );
 };

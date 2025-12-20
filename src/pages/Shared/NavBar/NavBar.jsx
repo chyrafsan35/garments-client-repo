@@ -52,7 +52,15 @@ const NavBar = () => {
                     {
                         user ?
                             <div className='flex gap-2 justify-center items-center'>
-                                <img src={`${user.photoURL}`} className='max-w-10 md:max-w-[45px] rounded-[50%]' alt="" />
+                                <div className="avatar">
+                                    <div className="w-10 md:w-[45px] rounded-full ring ring-white ring-offset-base-100 ring-offset-2">
+                                        <img
+                                            src={user.photoURL}
+                                            alt="user"
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                </div>
                                 <Link className="btn bg-primary hover:bg-[#0f4c75] text-white" onClick={handleLogOut}>Logout</Link>
                             </div>
                             :
