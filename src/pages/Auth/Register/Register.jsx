@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
+import useAxiosSecure from '../../../hook/axiosSecure';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,6 +13,7 @@ const Register = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [toggle, setToggle] = useState(true);
+    const useAxios = useAxiosSecure();
 
     const handleToggle = ()=> {
         setToggle(!toggle);
@@ -30,11 +32,24 @@ const Register = () => {
                 const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`;
                 axios.post(image_API_URL, formData)
                 .then(res => {
-                    console.log('After image upload', res.data.data.url)
+                    const photoURL = res.data.data.url;
+
+                    const userInfo = {
+                        user_email : data.email,
+                        user_name : data.name,
+                        user_photoURL : photoURL
+                    }
+                    
+                    useAxios.post('/users', userInfo)
+                    .then(res=>{
+                        if(res.data.insertedId){
+                            console.log('User created at the database !')
+                        }
+                    })
 
                     const userProfile = {
                         displayName : data.name,
-                        photoURL : res.data.data.url,
+                        photoURL : photoURL,
                     }
 
                     updateUserProfile(userProfile)

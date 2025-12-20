@@ -13,6 +13,7 @@ import MyOrders from "../pages/Dashboard/MyOrders/MyOrders";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentSuccessful from "../pages/Dashboard/Payment/PaymentSuccessful";
 import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
+import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -76,7 +77,11 @@ export const router = createBrowserRouter([
       {
         path: 'payment-cancelled',
         Component: PaymentCancelled
-      }
+      },
+      {
+        path: 'my-profile',
+        Component: MyProfile
+      },
     ]
   }
 ]);

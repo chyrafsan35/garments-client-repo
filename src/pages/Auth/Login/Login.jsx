@@ -37,12 +37,18 @@ const Login = () => {
                         {errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>}
 
                         <label className="label">Password</label>
-                        <div>
+                        <div className="relative">
+                            <input
+                                type={toggle ? "password" : "text"}
+                                {...register("password", { required: true })}
+                                className="input w-full"
+                                placeholder="Password"
+                            />
+
                             {
-                                toggle ?
-                                <><input type="password" {...register("password", { required: true })} className="input relative" placeholder="Password" /><FaEye onClick={handleToggle} className='absolute right-12 top-34 cursor-pointer'/></>
-                                :
-                                <><input type="text" {...register("password", { required: true })} className="input relative" placeholder="Password" /><FaEyeSlash onClick={handleToggle} className='absolute right-12 top-34 cursor-pointer'/></>
+                                toggle
+                                    ? <FaEye onClick={handleToggle} className="absolute right-3 top-3 cursor-pointer" />
+                                    : <FaEyeSlash onClick={handleToggle} className="absolute right-3 top-3 cursor-pointer" />
                             }
                         </div>
                         {errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>}
