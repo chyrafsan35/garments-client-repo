@@ -69,7 +69,6 @@ const MyOrders = () => {
                 <p className='mb-5'>Here are my orders - {orders.length} </p>
                 <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
                     <table className="table">
-                        {/* head */}
                         <thead>
                             <tr>
                                 <th> No </th>

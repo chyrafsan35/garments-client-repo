@@ -15,14 +15,14 @@ const Register = () => {
     const [toggle, setToggle] = useState(true);
     const useAxios = useAxiosSecure();
 
-    const handleToggle = ()=> {
+    const handleToggle = () => {
         setToggle(!toggle);
     }
 
     const handleForms = (data) => {
         const profileImg = data.photo[0];
 
-        registerUser(data.email, data.password, profileImg)
+        registerUser(data.email, data.password, profileImg, data.region)
             .then(result => {
                 console.log(result.user)
 
@@ -31,36 +31,37 @@ const Register = () => {
 
                 const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`;
                 axios.post(image_API_URL, formData)
-                .then(res => {
-                    const photoURL = res.data.data.url;
+                    .then(res => {
+                        const photoURL = res.data.data.url;
 
-                    const userInfo = {
-                        user_email : data.email,
-                        user_name : data.name,
-                        user_photoURL : photoURL
-                    }
-                    
-                    useAxios.post('/users', userInfo)
-                    .then(res=>{
-                        if(res.data.insertedId){
-                            console.log('User created at the database !')
+                        const userInfo = {
+                            user_email: data.email,
+                            user_name: data.name,
+                            user_photoURL: photoURL,
+                            user_role : data.region
                         }
-                    })
 
-                    const userProfile = {
-                        displayName : data.name,
-                        photoURL : photoURL,
-                    }
+                        useAxios.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('User created at the database !')
+                                }
+                            })
 
-                    updateUserProfile(userProfile)
-                    .then( res => {
-                        console.log('User added', res)
-                        navigate(location?.state || '/')
+                        const userProfile = {
+                            displayName: data.name,
+                            photoURL: photoURL,
+                        }
+
+                        updateUserProfile(userProfile)
+                            .then(res => {
+                                console.log('User added', res)
+                                navigate(location?.state || '/')
+                            })
+                            .catch(error => {
+                                console.log(error)
+                            })
                     })
-                    .catch(error => {
-                        console.log(error)
-                    })
-                })
             })
             .catch(error => {
                 console.log(error)
@@ -75,22 +76,29 @@ const Register = () => {
                         <label className="label">Name</label>
                         <input type="name" {...register("name", { required: true })} className="input" placeholder="Name" />
                         {errors.name?.type === 'required' && <p className='text-red-500'>Name is required</p>}
-                        
-                        <label className="label">Photo</label>
-                        <input type="file" {...register("photo", { required: true })} className="file-input file-input-primary" placeholder="Your Photo" />
-                        {errors.file?.type === 'required' && <p className='text-red-500'>Photo is required</p>}
-                        
+
                         <label className="label">Email</label>
                         <input type="email" {...register("email", { required: true })} className="input" placeholder="Email" />
                         {errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>}
 
+                        <label className="label">Photo</label>
+                        <input type="file" {...register("photo", { required: true })} className="file-input file-input-primary" placeholder="Your Photo" />
+                        {errors.file?.type === 'required' && <p className='text-red-500'>Photo is required</p>}
+
+                        <label className="label">Select role</label>
+                        <select {...register("region", { required : true })} defaultValue="Role" className="select">
+                            <option disabled={true}>Role</option>
+                            <option>Buyer</option>
+                            <option>Manager</option>
+                        </select>
+
                         <label className="label">Password</label>
                         <div>
                             {
-                                toggle ? 
-                                <><input type="password" {...register("password", { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z]).+$/ })} className="input relative" placeholder="Password" /><FaEye onClick={handleToggle} className='absolute right-12 top-[50%] cursor-pointer'/></>
-                                :
-                                <><input type="text" {...register("password", { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z]).+$/ })} className="input relative" placeholder="Password" /><FaEyeSlash onClick={handleToggle} className='absolute right-12 top-[50%] cursor-pointer'/></>
+                                toggle ?
+                                    <><input type="password" {...register("password", { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z]).+$/ })} className="input relative" placeholder="Password" /><FaEye onClick={handleToggle} className='absolute right-12 top-[55.5%] cursor-pointer' /></>
+                                    :
+                                    <><input type="text" {...register("password", { required: true, minLength: 6, pattern: /^(?=.*[a-z])(?=.*[A-Z]).+$/ })} className="input relative" placeholder="Password" /><FaEyeSlash onClick={handleToggle} className='absolute right-12 top-[55.5%] cursor-pointer' /></>
                             }
                         </div>
                         {errors.password?.type === 'required' && <p className='text-red-500'>Password is required</p>}

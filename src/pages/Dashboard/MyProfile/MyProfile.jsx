@@ -2,9 +2,10 @@ import React from 'react';
 import useAuth from '../../../hook/useAuth';
 import axiosSecure from '../../../hook/axiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import Loading from '../../../components/Loading/Loading';
 
 const MyProfile = () => {
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
     const useAxios = axiosSecure();
 
     const { data: payments = [], isLoading } = useQuery({
@@ -15,6 +16,13 @@ const MyProfile = () => {
             return result.data;
         }
     });
+
+    const handleLogout = () => {
+        logOut()
+        .then(res=>{
+            console.log('User logged out successfully !' , res)
+        })
+    }
 
     return (
         <div className="p-6 space-y-10">
@@ -32,6 +40,7 @@ const MyProfile = () => {
                                 {user?.displayName || 'No Name Found'}
                             </h2>
                             <p className="text-primary">{user?.email}</p>
+                            <button onClick={handleLogout} className='btn btn-primary border-0 text-white'>Log Out</button>
                         </div>
                     </div>
                 </div>
@@ -46,7 +55,7 @@ const MyProfile = () => {
 
                     {
                         isLoading ? (
-                            <p className="text-primary">Loading payment history...</p>
+                            <Loading></Loading>
                         ) : payments.length === 0 ? (
                             <p className="text-primary text-center py-10">
                                 No payment records found
