@@ -3,8 +3,16 @@ import { Link, Outlet } from 'react-router';
 import logo from '../assets/taati3.png';
 import { MdManageAccounts, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
+import useRole from '../hook/useRole';
+import Loading from '../components/Loading/Loading';
 
 const DashboardLayout = () => {
+    const { user_role , isLoading } = useRole();
+    if(isLoading){
+        return <Loading></Loading>
+    }
+    console.log('Dashboard user role is ', user_role)
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -43,17 +51,23 @@ const DashboardLayout = () => {
 
                         <li>
                             <Link to="my-profile" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Profile">
-                                <CgProfile className="size-5"/>
+                                <CgProfile className="size-5" />
                                 <span className="is-drawer-close:hidden">My Profile</span>
                             </Link>
                         </li>
 
-                        <li>
-                            <Link to="manage-users" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users">
-                                <MdManageAccounts className="size-5"/>
-                                <span className="is-drawer-close:hidden">Manage Users</span>
-                            </Link>
-                        </li>
+                        {
+                            user_role === 'Admin' &&
+                            <>
+                                <li>
+                                    <Link to="manage-users" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users">
+                                        <MdManageAccounts className="size-5" />
+                                        <span className="is-drawer-close:hidden">Manage Users</span>
+                                    </Link>
+                                </li>
+                            </>
+                        }
+
                     </ul>
                 </div>
             </div>

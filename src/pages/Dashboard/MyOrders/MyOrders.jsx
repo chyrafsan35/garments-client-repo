@@ -66,7 +66,7 @@ const MyOrders = () => {
     return (
         <div>
             <div className='p-5'>
-                <p className='mb-5'>Here are my orders - {orders.length} </p>
+                <p className='mb-5 text-4xl text-primary'>My Orders - {orders.length} </p>
                 <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
                     <table className="table">
                         <thead>

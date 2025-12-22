@@ -15,6 +15,7 @@ import PaymentSuccessful from "../pages/Dashboard/Payment/PaymentSuccessful";
 import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -85,7 +86,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'manage-users',
-        Component: ManageUsers
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute> 
       },
     ]
   }
