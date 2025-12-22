@@ -16,6 +16,7 @@ import PaymentCancelled from "../pages/Dashboard/Payment/PaymentCancelled";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
+import AdminAllProducts from "../pages/Dashboard/AdminAllProducts/AdminAllProducts";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: 'manage-users',
         element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute> 
+      },
+      {
+        path: 'all-products',
+        element: <AdminRoute><AdminAllProducts></AdminAllProducts></AdminRoute> 
       },
     ]
   }

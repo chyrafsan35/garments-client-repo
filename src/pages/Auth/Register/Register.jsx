@@ -6,10 +6,12 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
 import useAxiosSecure from '../../../hook/axiosSecure';
+import Swal from 'sweetalert2';
+import Loading from '../../../components/Loading/Loading';
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { registerUser, updateUserProfile } = useAuth()
+    const { registerUser, updateUserProfile, loading } = useAuth()
     const location = useLocation();
     const navigate = useNavigate();
     const [toggle, setToggle] = useState(true);
@@ -38,7 +40,7 @@ const Register = () => {
                             user_email: data.email,
                             user_name: data.name,
                             user_photoURL: photoURL,
-                            user_role : data.region
+                            user_role: data.region
                         }
 
                         useAxios.post('/users', userInfo)
@@ -56,6 +58,14 @@ const Register = () => {
                         updateUserProfile(userProfile)
                             .then(res => {
                                 console.log('User added', res)
+                                Swal.fire({
+                                    title: "User Registered!",
+                                    icon: "success",
+                                    draggable: true
+                                });
+                                if (loading) {
+                                    <Loading></Loading>
+                                }
                                 navigate(location?.state || '/')
                             })
                             .catch(error => {
@@ -86,7 +96,7 @@ const Register = () => {
                         {errors.file?.type === 'required' && <p className='text-red-500'>Photo is required</p>}
 
                         <label className="label">Select role</label>
-                        <select {...register("region", { required : true })} defaultValue="Role" className="select">
+                        <select {...register("region", { required: true })} defaultValue="Role" className="select">
                             <option disabled={true}>Role</option>
                             <option>Buyer</option>
                             <option>Manager</option>

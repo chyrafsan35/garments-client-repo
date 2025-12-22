@@ -6,14 +6,15 @@ import { FiEdit } from 'react-icons/fi';
 import { FaEye } from 'react-icons/fa6';
 import { MdDelete } from 'react-icons/md';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router';
 
 const MyOrders = () => {
 
     const { user } = useAuth();
     const useAxios = axiosSecure();
+
     const { data: orders = [], refetch } = useQuery({
         queryKey: ['myOrders', user?.email],
+        enabled: !!user?.email,
         queryFn: async () => {
             const res = await useAxios.get(`/my-orders?email=${user.email}`);
             return res.data;
@@ -21,8 +22,6 @@ const MyOrders = () => {
     });
 
     const handlePayment = async (order) => {
-        console.log(order);
-
         const paymentInfo = {
             cost: order.totalAmount,
             productId: order._id,
@@ -35,87 +34,111 @@ const MyOrders = () => {
     };
 
     const handleOrderDelete = id => {
-        console.log(id);
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "This order will be permanently cancelled.",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonColor: "#2563eb",
+            cancelButtonColor: "#dc2626",
+            confirmButtonText: "Yes, cancel it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
                 useAxios.delete(`/my-orders/${id}`)
                     .then(res => {
-                        refetch();
-                        console.log(res.data)
                         if (res.data.deletedCount) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Your order has been cancelled.",
-                                icon: "success"
-                            })
+                            refetch();
+                            Swal.fire("Cancelled!", "Your order has been cancelled.", "success");
                         }
                     })
             }
         });
-    }
+    };
 
     return (
-        <div>
-            <div className='p-5'>
-                <p className='mb-5 text-4xl text-primary'>My Orders - {orders.length} </p>
-                <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th> No </th>
-                                <th>Order ID</th>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
-                                <th>Payment</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                orders.map((order, index) =>
-                                    <tr key={order._id}>
-                                        <th>{index + 1}</th>
-                                        <td>{order._id}</td>
-                                        <td>{order.productTitle}</td>
-                                        <td>{order.orderQuantity}</td>
-                                        <td></td>
-                                        <td>
-                                            {
-                                                order.paymentStatus ?
-                                                    <span>Paid</span>
-                                                    :
-                                                    <button onClick={() => handlePayment(order)} className="btn btn-xm btn-primary">Pay</button>
-                                            }
-                                        </td>
-                                        <td>
-                                            <button className="btn btn-square hover:bg-primary hover:text-white mr-2">
-                                                <FiEdit />
-                                            </button>
-                                            <button className="btn btn-square hover:bg-primary hover:text-white mr-2">
-                                                <FaEye />
-                                            </button>
-                                            <button onClick={() => handleOrderDelete(order._id)} className="btn btn-square hover:bg-primary hover:text-white mr-2">
-                                                <MdDelete />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
-                </div>
+        <div className="p-6">
+            <div className="mb-6">
+                <h2 className="text-4xl font-bold text-primary">My Orders</h2>
+                <p className="text-gray-500 mt-1">Track and manage your orders</p>
             </div>
-        </div >
+
+            <div className="bg-white shadow-xl rounded-xl p-6">
+
+                {
+                    orders.length === 0 ?
+                        <div className="text-center py-10 text-gray-500">
+                            No orders found 🛒
+                        </div>
+                        :
+                        <div className="overflow-x-auto">
+                            <table className="table table-zebra w-full">
+                                <thead className="bg-base-200">
+                                    <tr className="text-base">
+                                        <th>#</th>
+                                        <th>Order ID</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Status</th>
+                                        <th>Payment</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        orders.map((order, index) => (
+                                            <tr key={order._id} className="hover">
+                                                <td>{index + 1}</td>
+                                                <td className="text-xs">{order._id}</td>
+                                                <td className="font-medium">{order.productTitle}</td>
+                                                <td>{order.orderQuantity}</td>
+
+                                                <td>
+                                                    {
+                                                        order.paymentStatus ?
+                                                            <span className="badge badge-success">Completed</span>
+                                                            :
+                                                            <span className="badge badge-warning">Pending</span>
+                                                    }
+                                                </td>
+
+                                                <td>
+                                                    {
+                                                        order.paymentStatus ?
+                                                            <span className="text-green-600 font-semibold">Paid</span>
+                                                            :
+                                                            <button
+                                                                onClick={() => handlePayment(order)}
+                                                                className="btn btn-sm btn-primary"
+                                                            >
+                                                                Pay Now
+                                                            </button>
+                                                    }
+                                                </td>
+
+                                                <td className="flex gap-2">
+                                                    <button className="btn btn-sm btn-outline">
+                                                        <FiEdit />
+                                                    </button>
+                                                    <button className="btn btn-sm btn-outline">
+                                                        <FaEye />
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleOrderDelete(order._id)}
+                                                        className="btn btn-sm btn-outline btn-error"
+                                                    >
+                                                        <MdDelete />
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                }
+
+            </div>
+        </div>
     );
 };
 

@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import useAxiosSecure from '../../../hook/axiosSecure';
 import { FaUserCheck } from 'react-icons/fa6';
 import { IoIosRemoveCircle } from 'react-icons/io';
 import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form';
 
 const ManageUsers = () => {
 
     const useAxios = useAxiosSecure();
+    const [rejectedUser, setRejectedUser] = useState(null);
 
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users', 'pending'],
@@ -16,6 +18,8 @@ const ManageUsers = () => {
             return res.data;
         }
     });
+
+    const { register, handleSubmit } = useForm();
 
     const handleApproval = (id) => {
         Swal.fire({
@@ -39,6 +43,8 @@ const ManageUsers = () => {
         })
     };
 
+    const rejectModalRef = useRef();
+
     const handleReject = (id) => {
         Swal.fire({
             title: "You sure ?",
@@ -48,18 +54,25 @@ const ManageUsers = () => {
             denyButtonText: `Not now`
         }).then((result) => {
             if (result.isConfirmed) {
-                useAxios.patch(`/users/${id}`, { status: 'Rejected' })
-                    .then(res => {
-                        if (res.data.modifiedCount) {
-                            Swal.fire("Rejected!", "", "success");
-                            refetch()
-                        }
-                    })
+                setRejectedUser(id)
+                rejectModalRef.current.showModal();
             } else if (result.isDenied) {
                 Swal.fire("Changes are not saved", "", "info");
             }
         })
     };
+
+    const handleFeedback = (data) => {
+        console.log(data, 'and the rejected user :', rejectedUser)
+        useAxios.patch(`/users/${rejectedUser}`, { status: 'Rejected', rejectionReason: data.rejectionReason, adminFeedback: data.adminFeedback })
+            .then(res => {
+                rejectModalRef.current.close()
+                if (res.data.modifiedCount) {
+                    Swal.fire("Rejected!", "", "success");
+                    refetch()
+                }
+            })
+    }
 
     const renderStatus = (status) => {
         if (status === 'Approved') {
@@ -145,6 +158,28 @@ const ManageUsers = () => {
                             </tbody>
                         </table>
                     </div>
+
+
+                    <dialog ref={rejectModalRef} className="modal">
+                        <div className="modal-box">
+                            <form className='card-body' onSubmit={handleSubmit(handleFeedback)}>
+                                <div>
+                                    <h3 className="font-bold text-lg text-primary">Suspend Reason </h3>
+                                    <input type="text" {...register('rejectionReason')} placeholder="Type here" className="input mb-10" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-lg text-primary">Admin Feedback</h3>
+                                    <textarea {...register('adminFeedback')} className="textarea" placeholder="Bio"></textarea>
+                                </div>
+
+                                <div className="modal-action">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button className="btn">Submit</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </dialog>
 
                 </div>
             </div>

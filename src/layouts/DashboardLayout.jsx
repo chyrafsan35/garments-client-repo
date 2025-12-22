@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router';
 import logo from '../assets/taati3.png';
-import { MdManageAccounts, MdOutlineProductionQuantityLimits } from 'react-icons/md';
+import { MdLocalGroceryStore, MdManageAccounts, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
 import useRole from '../hook/useRole';
 import Loading from '../components/Loading/Loading';
@@ -63,6 +63,12 @@ const DashboardLayout = () => {
                                     <Link to="manage-users" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Users">
                                         <MdManageAccounts className="size-5" />
                                         <span className="is-drawer-close:hidden">Manage Users</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="all-products" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Products">
+                                        <MdLocalGroceryStore className="size-5"/>
+                                        <span className="is-drawer-close:hidden">All Products</span>
                                     </Link>
                                 </li>
                             </>
