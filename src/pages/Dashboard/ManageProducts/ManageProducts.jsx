@@ -1,23 +1,26 @@
 import React, { useRef, useState } from 'react';
 import useAxiosSecure from '../../../hook/axiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../../hook/useAuth';
 import Loading from '../../../components/Loading/Loading';
+import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
-import { FiEdit } from 'react-icons/fi';
-import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
-const AdminAllProducts = () => {
+const ManageProducts = () => {
 
     const editModalRef = useRef();
     const { register, handleSubmit } = useForm();
 
     const useAxios = useAxiosSecure();
-    const { data: products = [], isLoading, refetch } = useQuery({
-        queryKey: ['all-products'],
+    const { user } = useAuth();
+    const { data: managerProducts = [], isLoading, refetch } = useQuery({
+        queryKey: ['manager-products', user?.email],
+        enabled: !!user?.email,
         queryFn: async () => {
-            const result = await useAxios.get('/products')
+            const result = await useAxios.get(`/products/by-email/${user.email}`)
             return result.data;
         }
     })
@@ -61,14 +64,6 @@ const AdminAllProducts = () => {
             })
     }
 
-    const handleToggle = async (order) => {
-        await useAxios.patch(`/products/${order._id}`, { showOnHome: !order.showOnHome })
-            .then(res => {
-                console.log(res)
-                refetch()
-            })
-    }
-
     const handleDelete = async (order) => {
         Swal.fire({
             title: "Are you sure?",
@@ -94,7 +89,7 @@ const AdminAllProducts = () => {
     return (
         <div className='p-6'>
             <div>
-                <p className='text-3xl font-semibold text-primary py-5 text-center'>All Products</p>
+                <h2 className="text-3xl font-semibold text-center text-primary py-5">Manage Products</h2>
                 {
                     isLoading ?
                         <Loading></Loading>
@@ -103,53 +98,34 @@ const AdminAllProducts = () => {
                             <table className="table w-full">
                                 <thead className="bg-base-200 text-base font-semibold">
                                     <tr>
-                                        <th>Product</th>
+                                        <th>#</th>
+                                        <th>Name</th>
                                         <th>Price</th>
-                                        <th>Category</th>
-                                        <th>Created By</th>
-                                        <th className="text-center">Show on Home</th>
+                                        <th>Payment Mode</th>
                                         <th className="text-right">Actions</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    {products.map((order) => (
+                                    {managerProducts.map((order) => (
                                         <tr key={order._id} className="hover">
 
                                             <td>
-                                                <div className="flex items-center gap-3">
-                                                    <img
-                                                        src={order.image}
-                                                        alt={order.title}
-                                                        className="w-12 h-12 rounded-lg object-cover bg-base-200"
-                                                    />
-                                                    <div>
-                                                        <p className="font-semibold">{order.title}</p>
-                                                        <p className="text-xs text-gray-500">
-                                                            ID: {order._id.slice(0, 8)}...
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <span className="badge badge-outline badge-primary">
-                                                    ৳ {order.price}
-                                                </span>
+                                                <img src={order.image} className='max-w-[50px]' alt="" />
                                             </td>
 
                                             <td>
                                                 <span className="badge badge-ghost">
-                                                    {order.category}
+                                                    {order.title}
                                                 </span>
                                             </td>
 
                                             <td className="text-sm text-gray-600">
-                                                {order.createdBy}
+                                                {order.price}
                                             </td>
 
-                                            <td className="text-center">
-                                                <input type="checkbox" checked={order.showOnHome} onChange={() => handleToggle(order)} className="checkbox checkbox-xl" />
+                                            <td className="text-sm text-gray-600">
+                                                {order.paymentOption}
                                             </td>
 
                                             <td className="text-right">
@@ -159,7 +135,7 @@ const AdminAllProducts = () => {
                                                         className="btn btn-sm btn-outline btn-primary"
                                                         title="Edit Product"
                                                     >
-                                                        <FiEdit />
+                                                        <FaEdit />
                                                     </button>
 
                                                     <button
@@ -176,7 +152,6 @@ const AdminAllProducts = () => {
                                 </tbody>
                             </table>
                         </div>
-
                 }
                 <dialog ref={editModalRef} className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box max-w-5xl p-0 overflow-scroll">
@@ -342,4 +317,4 @@ const AdminAllProducts = () => {
     );
 };
 
-export default AdminAllProducts;
+export default ManageProducts;

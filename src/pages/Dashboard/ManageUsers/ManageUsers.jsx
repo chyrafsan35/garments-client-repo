@@ -90,7 +90,7 @@ const ManageUsers = () => {
                 <div className="card-body">
 
                     <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-3xl font-semibold text-primary">
+                        <h2 className="text-3xl font-semibold text-primary py-5 text-center">
                             Manage Users
                         </h2>
                     </div>
@@ -173,7 +173,6 @@ const ManageUsers = () => {
                                 </div>
 
                                 <div className="modal-action">
-                                    {/* if there is a button in form, it will close the modal */}
                                     <button className="btn">Submit</button>
                                 </div>
                             </form>

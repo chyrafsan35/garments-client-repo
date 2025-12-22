@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router';
 import logo from '../assets/taati3.png';
-import { MdLocalGroceryStore, MdManageAccounts, MdOutlineProductionQuantityLimits } from 'react-icons/md';
+import { MdLocalGroceryStore, MdManageAccounts, MdOutlinePending, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { CgProfile } from 'react-icons/cg';
 import useRole from '../hook/useRole';
 import Loading from '../components/Loading/Loading';
+import { IoIosAddCircle, IoIosCard } from 'react-icons/io';
+import { SiGooglecampaignmanager360 } from 'react-icons/si';
 
 const DashboardLayout = () => {
-    const { user_role , isLoading } = useRole();
-    if(isLoading){
+    const { user_role, isLoading } = useRole();
+    if (isLoading) {
         return <Loading></Loading>
     }
     console.log('Dashboard user role is ', user_role)
@@ -42,12 +44,39 @@ const DashboardLayout = () => {
                             </Link>
                         </li>
 
-                        <li>
-                            <Link to="my-orders" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Orders">
-                                <MdOutlineProductionQuantityLimits className="size-5" />
-                                <span className="is-drawer-close:hidden">My Orders</span>
-                            </Link>
-                        </li>
+                        {
+                            user_role === 'Buyer' &&
+                            <li>
+                                <Link to="my-orders" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Orders">
+                                    <MdOutlineProductionQuantityLimits className="size-5" />
+                                    <span className="is-drawer-close:hidden">My Orders</span>
+                                </Link>
+                            </li>
+                        }
+
+                        {
+                            user_role === 'Manager' &&
+                            <>
+                                <li>
+                                    <Link to="add-products" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Add Products">
+                                        <IoIosAddCircle className="size-5" />
+                                        <span className="is-drawer-close:hidden">Add Products</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="manage-products" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Manage Products">
+                                        <SiGooglecampaignmanager360 className="size-5"/>
+                                        <span className="is-drawer-close:hidden">Manage Products</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="pending-orders" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Orders">
+                                        <MdOutlinePending className="size-5"/>
+                                        <span className="is-drawer-close:hidden">Pending Orders</span>
+                                    </Link>
+                                </li>
+                            </>
+                        }
 
                         <li>
                             <Link to="my-profile" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My Profile">
@@ -67,8 +96,14 @@ const DashboardLayout = () => {
                                 </li>
                                 <li>
                                     <Link to="all-products" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Products">
-                                        <MdLocalGroceryStore className="size-5"/>
+                                        <MdLocalGroceryStore className="size-5" />
                                         <span className="is-drawer-close:hidden">All Products</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="all-orders" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="All Orders">
+                                        <IoIosCard />
+                                        <span className="is-drawer-close:hidden">All Orders</span>
                                     </Link>
                                 </li>
                             </>

@@ -17,6 +17,10 @@ import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AdminAllProducts from "../pages/Dashboard/AdminAllProducts/AdminAllProducts";
+import AllOrders from "../pages/Dashboard/AllOrders/AllOrders";
+import ManagerRoute from "./ManagerRoute";
+import AddProducts from "../pages/Dashboard/AddProducts/AddProducts";
+import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +96,18 @@ export const router = createBrowserRouter([
       {
         path: 'all-products',
         element: <AdminRoute><AdminAllProducts></AdminAllProducts></AdminRoute> 
+      },
+      {
+        path: 'all-orders',
+        element: <AdminRoute><AllOrders></AllOrders></AdminRoute> 
+      },
+      {
+        path: 'add-products',
+        element: <ManagerRoute><AddProducts></AddProducts></ManagerRoute>
+      },
+      {
+        path: 'manage-products',
+        element: <ManagerRoute><ManageProducts></ManageProducts></ManagerRoute>
       },
     ]
   }

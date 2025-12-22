@@ -58,7 +58,7 @@ const MyOrders = () => {
     return (
         <div className="p-6">
             <div className="mb-6">
-                <h2 className="text-4xl font-bold text-primary">My Orders</h2>
+                <h2 className="text-3xl font-semibold text-primary py-5 text-center">My Orders</h2>
                 <p className="text-gray-500 mt-1">Track and manage your orders</p>
             </div>
 
