@@ -6,7 +6,7 @@ import { CgProfile } from 'react-icons/cg';
 import useRole from '../hook/useRole';
 import Loading from '../components/Loading/Loading';
 import { IoIosAddCircle, IoIosCard } from 'react-icons/io';
-import { SiGooglecampaignmanager360 } from 'react-icons/si';
+import { SiGooglecampaignmanager360, SiTicktick } from 'react-icons/si';
 
 const DashboardLayout = () => {
     const { user_role, isLoading } = useRole();
@@ -73,6 +73,12 @@ const DashboardLayout = () => {
                                     <Link to="pending-orders" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Pending Orders">
                                         <MdOutlinePending className="size-5"/>
                                         <span className="is-drawer-close:hidden">Pending Orders</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="approved-orders" className="flex items-center gap-3 is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Approved Orders">
+                                        <SiTicktick className="size-5"/>
+                                        <span className="is-drawer-close:hidden">Approved Orders</span>
                                     </Link>
                                 </li>
                             </>

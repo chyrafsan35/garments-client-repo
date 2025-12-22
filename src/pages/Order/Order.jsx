@@ -49,7 +49,12 @@ const Order = () => {
 
     const handleOrder = data => {
         console.log(data)
-        useAxios.post('/my-orders', data)
+        const orderData = {
+            ...data,
+            createdBy: product.createdBy,
+            orderStatus : 'Pending'  
+        };
+        useAxios.post('/my-orders', orderData)
             .then(res => {
                 navigate('/dashboard/my-orders');
                 Swal.fire({
