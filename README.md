@@ -2,6 +2,12 @@
 
 This website helps management of garment products. Admin, Manager and Buyer roles are available only. Manager can add products and can edit these. They can accept buyers booking request. Also managers will provide with tracking information of parcels. It's a user-friendly and interactive website. 
 
+<p align="center" style="display: flex; overflow-x: auto; gap: 10px;">
+  <img src="https://i.ibb.co.com/kV2Td6gm/Screenshot-2026-01-01-152940.png" />
+  <img src="https://i.ibb.co.com/JF2kZT0z/Screenshot-2026-01-01-153545.png" />
+  <img src="https://i.ibb.co.com/tpSwfR4V/Screenshot-2026-01-01-153638.png" />
+</p>
+
 ## Technologies Used
 
 <ul>
@@ -44,4 +50,4 @@ This website helps management of garment products. Admin, Manager and Buyer role
 5. User can do the whole management of products through the whole dashboard
 
 ## Resources
-Live link : 
+Live link : <a href="https://garments-gamma.vercel.app/" target="_blank">https://garments-gamma.vercel.app/</a>
