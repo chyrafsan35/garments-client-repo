@@ -22,6 +22,20 @@ This website helps management of garment products. Admin, Manager and Buyer role
   <li><b>Parcel Tracking :</b> Buyer can track their parcel.</li>
 </ul>
 
+## Dependencies 
+<ul>
+  <li>Tailwind CSS</li>
+  <li>Tanstack Query</li>
+  <li>Axios</li>
+  <li>React</li>
+  <li>Firebase</li>
+  <li>React Hook Form</li>
+  <li>React Icons</li>
+  <li>Stripe</li>
+  <li>SweetAlert</li>
+  <li>Swiper</li>
+</ul>
+
 ## Steps To Run The Project 
 1. Go to the live link
 2. In the home page, craete an account if entered as a new user
