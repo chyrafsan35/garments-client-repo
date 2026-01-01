@@ -1,16 +1,33 @@
-# React + Vite
+# Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This website helps management of garment products. Admin, Manager and Buyer roles are available only. Manager can add products and can edit these. They can accept buyers booking request. Also managers will provide with tracking information of parcels. It's a user-friendly and interactive website. 
 
-Currently, two official plugins are available:
+## Technologies Used
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<ul>
+  <li>React</li>
+  <li>Node js</li>
+  <li>Javascript</li>
+  <li>Tailwind CSS</li>
+  <li>Daisy UI</li>
+  <li>React router</li>
+  <li>Mongodb (Database)</li>
+</ul>
 
-## React Compiler
+## Core Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<ul>
+  <li><b>Presentation :</b> The products are presented in a aligned grid layout. Products are sorted in order of types.</li>
+  <li><b>Payment :</b> It's payment method is also one of the core features of this website. </li>
+  <li><b>Parcel Tracking :</b> Buyer can track their parcel.</li>
+</ul>
 
-## Expanding the ESLint configuration
+## Steps To Run The Project 
+1. Go to the live link
+2. In the home page, craete an account if entered as a new user
+3. Choose role for marketing.
+4. Different dashboards will be ceated according to user role
+5. User can do the whole management of products through the whole dashboard
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Resources
+Live link : 
