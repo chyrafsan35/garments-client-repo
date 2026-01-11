@@ -7,8 +7,8 @@ import HomeProducts from './HomeProducts';
 const Home = () => {
     return (
         <div className='bg-[#F8FAFC]'>
+            <Banner></Banner>
             <div className='max-w-[1440px] mx-auto'>
-                <Banner></Banner>
                 <HomeProducts></HomeProducts>
                 <Workflow></Workflow>
                 <Feedbacks></Feedbacks>
