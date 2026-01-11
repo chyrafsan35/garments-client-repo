@@ -18,13 +18,13 @@ const HomeProducts = () => {
     })
 
     return (
-        <div className='py-[50px] text-[#1A1A1A]'>
+        <div className='py-8 text-[#1A1A1A] '>
             <h2 className='text-center py-4 font-semibold text-xl'>Our Products</h2>
             {
                 isLoading ?
                     <Loading></Loading>
                     :
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-auto py-8'>
+                    <div className='grid grid-cols-1 md:grid-cols-5 gap-2 mx-auto py-2'>
                         {
                             products.map(card => <ProductCard key={card.id} card={card}></ProductCard>)
                         }

@@ -38,7 +38,7 @@ const Banner = () => {
 
             <div className="relative z-20 grid grid-cols-1 md:grid-cols-10 w-full h-full">
 
-                <div className='col-span-1 md:col-span-6 flex items-center px-6 py-12 md:px-20'>
+                <div className='col-span-1 md:col-span-6 flex items-center py-12 md:px-20'>
                     <div className="text-white text-center md:text-left w-full">
                         <h1 className="text-xl md:text-5xl font-extrabold leading-tight">
                             DRESS UP . WIN BIG<br />
@@ -82,7 +82,7 @@ const Banner = () => {
                                                         <div className="flex gap-4 items-center justify-center">
                                                             <motion.p
                                                                 initial={{ x: -300, y: -500, opacity: 0 }}
-                                                                animate={{ x: window.innerWidth < 768 ? -150 : -230, y: 0, opacity: 1 }}
+                                                                animate={{ x: window.innerWidth < 768 ? -130 : -230, y: 0, opacity: 1 }}
                                                                 exit={{ x: -300, y: -500, opacity: 0 }}
                                                                 transition={{
                                                                     duration: 1.5,

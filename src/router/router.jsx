@@ -59,9 +59,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        element: <PrivateRoute>
-          <ProductDetails></ProductDetails>
-        </PrivateRoute>
+        Component: ProductDetails
       },
       {
         path: "/order",
@@ -113,15 +111,15 @@ export const router = createBrowserRouter([
       },
       {
         path: 'manage-users',
-        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute> 
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       },
       {
         path: 'all-products',
-        element: <AdminRoute><AdminAllProducts></AdminAllProducts></AdminRoute> 
+        element: <AdminRoute><AdminAllProducts></AdminAllProducts></AdminRoute>
       },
       {
         path: 'all-orders',
-        element: <AdminRoute><AllOrders></AllOrders></AdminRoute> 
+        element: <AdminRoute><AllOrders></AllOrders></AdminRoute>
       },
       {
         path: 'add-products',

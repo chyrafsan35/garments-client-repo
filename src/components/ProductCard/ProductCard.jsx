@@ -2,23 +2,35 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const ProductCard = ({ card }) => {
-
     return (
-        <div className="card bg-primary text-white w-96 shadow-sm mx-auto my-5">
-            <figure>
+        <div className="card  w-full max-w-sm shadow-xl mx-auto flex flex-col h-full">
+
+            <figure className="h-64 w-full bg-white overflow-hidden">
                 <img
                     src={card.image}
-                    alt="Shoes" />
+                    alt={card.title}
+                    className="w-full h-full object-contain p-4"
+                />
             </figure>
-            <div className="card-body ">
-                <h2 className="card-title">
+
+            <div className="card-body flex flex-col flex-grow p-5">
+                <h2 className="card-title text-lg font-bold">
                     {card.title}
-                    <div className="badge badge-secondary">NEW</div>
+                    <div className="badge badge-primary shrink-0 text-xs">NEW</div>
                 </h2>
-                <p>{card.description}</p>
-                <div className="card-actions flex justify-center items-center">
-                    <p className='font-semibold text-[15px]'>Price : {card.price}tk</p>
-                    <Link to={`/product/${card._id}`} className='btn bg-[#28C7DB] hover:bg-[#1fa7b8] border-0 text-white'>View Details</Link>
+
+                <p className="text-sm opacity-80 line-clamp-2 flex-grow">
+                    {card.description}
+                </p>
+
+                <div className="card-actions flex justify-between items-center mt-4 border-t border-white/10 pt-4">
+                    <p className='font-semibold text-md'>Price: {card.price}tk</p>
+                    <Link
+                        to={`/product/${card._id}`}
+                        className='btn btn-sm bg-primary hover:bg-primary/70 border-0 text-white'
+                    >
+                        View Details
+                    </Link>
                 </div>
             </div>
         </div>
