@@ -19,7 +19,13 @@ const NavBar = () => {
         <li><NavLink to={'all-product'}>All-Product</NavLink></li>
         {
             user ?
-                <li><NavLink to={'dashboard'}>Dashboard</NavLink></li> :
+                <>
+                    <li><NavLink to={'dashboard'}>Dashboard</NavLink></li>
+                    <li><NavLink to={'help'}>Help</NavLink></li>
+                    <li><NavLink to={'feedback'}>Feedback</NavLink></li>
+                    <li><NavLink to={'contact'}>Contact</NavLink></li>
+                </> 
+                :
                 <>
                     <li><NavLink to={'about-us'}>About Us</NavLink></li>
                     <li><NavLink to={'contact'}>Contact</NavLink></li>
@@ -28,7 +34,7 @@ const NavBar = () => {
         }
     </>
     return (
-        <div className=" bg-base-100 shadow-sm">
+        <div className=" bg-base-100 sticky top-0 z-50  shadow-sm">
             <div className='max-w-[1440px] mx-auto flex items-center p-2 min-h-4rem'>
                 <div className="navbar-start">
                     <div className="dropdown">

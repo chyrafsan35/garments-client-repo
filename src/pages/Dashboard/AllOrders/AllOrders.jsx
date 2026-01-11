@@ -7,7 +7,7 @@ import { FaRegEye } from 'react-icons/fa6';
 const AllOrders = () => {
 
     const useAxios = useAxiosSecure();
-    const { data: orders = [], isLoading, refetch } = useQuery({
+    const { data: orders = [], isLoading } = useQuery({
         queryKey: ['all-orders'],
         queryFn: async () => {
             const result = await useAxios.get('/my-orders')
@@ -61,7 +61,7 @@ const AllOrders = () => {
                                             </td>
 
                                             <td className="text-sm text-gray-600">
-                                                {order.status}
+                                                {order.orderStatus}
                                             </td>
 
                                             <td className="text-right">

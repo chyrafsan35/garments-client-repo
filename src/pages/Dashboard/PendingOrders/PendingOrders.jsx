@@ -11,11 +11,11 @@ const PendingOrders = () => {
 
     const useAxios = useAxiosSecure();
     const { user } = useAuth()
-    const { data: pendingData = [], isLoading } = useQuery({
+    const { data: pendingData = [], isLoading, refetch } = useQuery({
         queryKey: ['pending-orders', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
-            const result = await useAxios.get(`/my-orders/${user.email}`);
+            const result = await useAxios.get(`/my-orders/${user.email}/status`);
             return result.data;
         }
     })
@@ -23,6 +23,7 @@ const PendingOrders = () => {
     const approveOrder = async (order) => {
         try {
             await useAxios.patch(`/my-orders/${order._id}/approve`);
+            refetch();
             Swal.fire({
                 title: 'Order Approved!',
                 icon: 'success'
@@ -35,6 +36,7 @@ const PendingOrders = () => {
     const rejectOrder = async (order) => {
         try {
             await useAxios.patch(`/my-orders/${order._id}/reject`);
+            refetch();
             Swal.fire({
                 title: 'Order Rejected!',
                 icon: 'error'
@@ -96,7 +98,7 @@ const PendingOrders = () => {
                                                     <button
                                                         onClick={() => approveOrder(order)}
                                                         className="btn btn-sm btn-outline btn-primary"
-                                                        title="Edit Product"
+                                                        title="Approve Product"
                                                     >
                                                         <SiTicktick />
                                                     </button>
@@ -104,7 +106,7 @@ const PendingOrders = () => {
                                                     <button
                                                         onClick={() => rejectOrder(order)}
                                                         className="btn btn-sm btn-outline btn-error"
-                                                        title="Delete Product"
+                                                        title="Reject Product"
                                                     >
                                                         <FaBan />
                                                     </button>
@@ -112,7 +114,7 @@ const PendingOrders = () => {
                                                     <button
                                                         
                                                         className="btn btn-sm btn-outline btn-primary"
-                                                        title="Delete Product"
+                                                        title="View Product"
                                                     >
                                                         <FaRegEye />
                                                     </button>

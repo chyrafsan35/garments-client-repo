@@ -64,7 +64,7 @@ const ManageProducts = () => {
             })
     }
 
-    const handleDelete = async (order) => {
+    const handleDelete = async (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "This product will be permanently deleted.",
@@ -75,7 +75,7 @@ const ManageProducts = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                useAxios.delete(`/products/${order._id}`)
+                useAxios.delete(`/products/${id}`)
                     .then(res => {
                         if (res.data.deletedCount) {
                             refetch();

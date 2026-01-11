@@ -17,7 +17,7 @@ const AdminAllProducts = () => {
     const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['all-products'],
         queryFn: async () => {
-            const result = await useAxios.get('/products')
+            const result = await useAxios.get('/admin/products')
             return result.data;
         }
     })

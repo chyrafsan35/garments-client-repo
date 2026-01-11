@@ -8,34 +8,15 @@ import ReviewCard from '../../../components/ReviewCard/ReviewCard';
 
 const Feedbacks = () => {
     const [reviews, setReviews] = useState([]);
-    const reviewData = fetch('../../../../public/feedbacks.json').then(res => res.json()).then(data => setReviews(data))
-    console.log(reviewData)
+    const reviewData = fetch('/feedbacks.json').then(res => res.json()).then(data => setReviews(data))
+    // console.log(reviewData)
     
     return (
         <div className='py-[50px] text-[#1A1A1A] bg-white'>
             <h2 className='text-center py-4 font-semibold text-xl'>Customer Feedbacks</h2>
             <>
                 <Swiper
-                    // loop={true}
-                    // effect={'coverflow'}
-                    // grabCursor={true}
-                    // centeredSlides={true}
-                    // slidesPerView={3}
-                    // coverflowEffect={{
-                    //     rotate: 30,
-                    //     stretch: '50%',
-                    //     depth: 200,
-                    //     modifier: 1,
-                    //     scale: 0.75,
-                    //     slideShadows: true,
-                    // }}
-                    // autoplay={{
-                    //     delay: 2000,
-                    //     disableOnInteraction: false,
-                    // }}
-                    // pagination={true}
-                    // modules={[EffectCoverflow, Pagination, Autoplay]}
-                    // className="mySwiper"
+                    
                     loop={true}
                     effect={'coverflow'}
                     grabCursor={true}

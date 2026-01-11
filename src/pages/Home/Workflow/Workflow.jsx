@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import FlowCard from '../../../components/FlowCard/FlowCard';
 
 const Workflow = () => {
-    const steps = fetch('../../../../public/workflow.json').then(res=>res.json()).then(data=>setStepsData(data));
+    const steps = fetch('/workflow.json').then(res=>res.json()).then(data=>setStepsData(data));
     const [stepsData, setStepsData] = useState([]);
-    console.log(steps);
+    // console.log(steps);
 
     return (
         <div className='py-[50px] text-[#1A1A1A]'>

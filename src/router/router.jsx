@@ -23,6 +23,10 @@ import AddProducts from "../pages/Dashboard/AddProducts/AddProducts";
 import ManageProducts from "../pages/Dashboard/ManageProducts/ManageProducts";
 import PendingOrders from "../pages/Dashboard/PendingOrders/PendingOrders";
 import ApprovedOrders from "../pages/Dashboard/ApprovedOrders/ApprovedOrders";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import Contact from "../pages/Contact/Contact";
+import Feedback from "../pages/Feedback/Feedback";
+import Help from "../pages/Help/Help";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +40,22 @@ export const router = createBrowserRouter([
       {
         path: "all-product",
         Component: AllProducts
+      },
+      {
+        path: "about-us",
+        Component: AboutUs
+      },
+      {
+        path: "contact",
+        Component: Contact
+      },
+      {
+        path: "feedback",
+        Component: Feedback
+      },
+      {
+        path: "help",
+        Component: Help
       },
       {
         path: "/product/:id",

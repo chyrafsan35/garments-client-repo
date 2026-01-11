@@ -5,11 +5,14 @@ import Loading from '../../../components/Loading/Loading';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hook/useAuth';
 import axios from 'axios';
+import useRole from '../../../hook/useRole';
 
 const AddProducts = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const useAxios = useAxiosSecure();
-    const { loading , user } = useAuth()
+    const { loading, user } = useAuth();
+    const { status = user.status } = useRole();
+    console.log({ status })
 
     const handleAddProduct = async (data) => {
         const formData = new FormData();
@@ -30,7 +33,7 @@ const AddProducts = () => {
             video: data.video || '',
             image: imageURL,
             showOnHome: false,
-            createdBy : user.email
+            createdBy: user.email
         };
 
         useAxios.post('/products', productData)
@@ -42,6 +45,15 @@ const AddProducts = () => {
                 });
                 console.log(res.data)
                 reset()
+            })
+            .catch(err => {
+                if (err.response?.status === 403) {
+                    Swal.fire(
+                        'Access Denied',
+                        'Your account is rejected. You cannot add products.',
+                        'error'
+                    );
+                }
             })
     }
 
@@ -181,7 +193,7 @@ const AddProducts = () => {
                                     </div>
 
                                     <div className="form-control">
-                                        <label className="label font-semibold mr-5">Show On Home</label> 
+                                        <label className="label font-semibold mr-5">Show On Home</label>
                                         <input type="text" {...register("showOnHome", { valueAsBoolean: true })} className="input" value={false} readOnly />
                                     </div>
 
@@ -189,9 +201,16 @@ const AddProducts = () => {
                             </div>
 
                             <div className="flex justify-end pt-6">
-                                <button className="btn bg-primary hover:bg-[#0f4c75] text-white px-10">
-                                    Add Product
-                                </button>
+                                {
+                                    status !== 'Rejected' ?
+                                        <button className="btn bg-primary hover:bg-[#0f4c75] text-white px-10">
+                                            Add Product
+                                        </button>
+                                        :
+                                        <button disabled className=" px-10 bg-primary text-white rounded-lg text-lg hover:bg-[#0f4c75] transition btn border-0 disabled:opacity-40 disabled:cursor-not-allowed">
+                                            Add Product
+                                        </button>
+                                }
                             </div>
 
                         </form>

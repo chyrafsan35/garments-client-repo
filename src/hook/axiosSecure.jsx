@@ -5,8 +5,10 @@ import { LiaChessPawnSolid } from 'react-icons/lia';
 import { useNavigate } from 'react-router';
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:3000'
+    // baseURL: 'http://localhost:3000/'
+    baseURL: 'https://server-eight-eta-49.vercel.app'
 })
+
 
 const useAxiosSecure = () => {
     const { user, logOut } = useAuth();
