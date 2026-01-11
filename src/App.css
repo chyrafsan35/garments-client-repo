@@ -5,6 +5,15 @@
   themes: light --default;
  };
 
+
+
+@font-face {
+  font-family: 'Pacifico';
+  src: url('./assets/Pacifico/Pacifico-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
  @plugin "daisyui/theme" {
   name: "light";
   default: true;
@@ -14,6 +23,11 @@
   --color-secondary: #28C7DB;
   --color-hover2: #1FA7B8;
   --color-text: #FFFFFF;
+}
+
+@theme {
+  --font-pacifico: "Pacifico", cursive;
+  --font-ubuntu: "Ubuntu", sans-serif;
 }
 
 body {

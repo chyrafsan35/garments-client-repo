@@ -4,19 +4,23 @@ import bannerTex2 from '../../../assets/hero-pattern2.png'
 import { NavLink } from 'react-router';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 import navyHoodie from '../../../assets/navy_blue_hoodie.png';
 import whiteHoodie from '../../../assets/white_hoodie.png';
 import grayHoodie from '../../../assets/gray_hoodie.png';
+import orangeHoodie from '../../../assets/orange_hoodie.png';
+
 
 const Banner = () => {
 
     const slides = [
-        { id: 1, image: navyHoodie },
-        { id: 2, image: whiteHoodie },
-        { id: 3, image: grayHoodie }
+        { id: 1, image: navyHoodie, title2: 'Panther', title1: 'Navy', color: '#3B1E54' },
+        { id: 2, image: whiteHoodie, title2: 'Angel', title1: 'White', color: '#FFFFFF' },
+        { id: 3, image: grayHoodie, title2: 'American', title1: 'Gray', color: '#6B7280' },
+        { id: 4, image: orangeHoodie, title2: 'Ethnic', title1: 'Orange', color: '#9A3412' }
     ];
 
     return (
@@ -61,20 +65,65 @@ const Banner = () => {
                     <div className="w-full h-[350px] md:h-[500px] py-10">
                         <Swiper
                             modules={[Autoplay, Pagination]}
-                            autoplay={{ delay: 2500 }}
+                            autoplay={{ delay: 2800 }}
+                            speed={1200}
                             pagination={{ clickable: true }}
                             loop={true}
                             className="h-full"
                         >
                             {slides.map(slide => (
                                 <SwiperSlide key={slide.id}>
-                                    <div className="h-full w-full flex items-center justify-center p-4">
-                                        <img
-                                            src={slide.image}
-                                            alt="product"
-                                            className='max-h-full max-w-full object-contain drop-shadow-2xl'
-                                        />
-                                    </div>
+                                    {({ isActive }) => (
+                                        <div className="h-full w-full flex items-center justify-center p-4 relative">
+
+                                            <div className='absolute inset-0 flex justify-center gap-4 pointer-events-none overflow-hidden'>
+                                                <AnimatePresence mode='wait'>
+                                                    {isActive && (
+                                                        <div className="flex gap-4 items-center justify-center">
+                                                            <motion.p
+                                                                initial={{ x: -300, y: -500, opacity: 0 }}
+                                                                animate={{ x: window.innerWidth < 768 ? -150 : -250, y: 0, opacity: 1 }}
+                                                                exit={{ x: -300, y: -500, opacity: 0 }}
+                                                                transition={{
+                                                                    duration: 1.5,
+                                                                    ease: [0.16, 1, 0.3, 1], 
+                                                                    delay: 0.3 
+                                                                }}
+                                                                className={`  text-transparent font-pacifico [writing-mode:vertical-rl] rotate-180 text-6xl md:text-8xl drop-shadow-lg`}
+                                                                style={{ WebkitTextStroke: `2px ${slide.color}` }}
+                                                            >
+                                                                {slide.title2}
+                                                            </motion.p>
+
+                                                            <motion.p
+                                                                initial={{ x: 300, y: 500, opacity: 0 }}
+                                                                animate={{ x: window.innerWidth < 768 ? 150 : 250, y: 0, opacity: 1 }}
+                                                                exit={{ x: 300, y: 500, opacity: 0 }}
+                                                                transition={{
+                                                                    duration: 1.5,
+                                                                    ease: [0.16, 1, 0.3, 1],
+                                                                    delay: 0.1
+                                                                }}
+                                                                className={`  font-pacifico [writing-mode:vertical-rl] rotate-180 text-6xl md:text-8xl drop-shadow-lg`}
+                                                                style={{ color: slide.color }}
+                                                            >
+                                                                {slide.title1}
+                                                            </motion.p>
+                                                        </div>
+                                                    )}
+                                                </AnimatePresence>
+                                            </div>
+
+                                            <motion.img
+                                                initial={{ scale: 0.8, opacity: 0 }}
+                                                animate={isActive ? { scale: 1, opacity: 1 } : {}}
+                                                transition={{ duration: 0.8 }}
+                                                src={slide.image}
+                                                alt="product"
+                                                className='relative max-h-full max-w-full object-contain drop-shadow-2xl z-10'
+                                            />
+                                        </div>
+                                    )}
                                 </SwiperSlide>
                             ))}
                         </Swiper>
