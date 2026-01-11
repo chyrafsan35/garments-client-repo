@@ -18,9 +18,9 @@ const Banner = () => {
 
     const slides = [
         { id: 1, image: navyHoodie, title2: 'Panther', title1: 'Navy', color: '#3B1E54' },
-        { id: 2, image: whiteHoodie, title2: 'Angel', title1: 'White', color: '#FFFFFF' },
+        { id: 2, image: whiteHoodie, title2: 'Angel', title1: 'White', color: '#FCFAFA' },
         { id: 3, image: grayHoodie, title2: 'American', title1: 'Gray', color: '#6B7280' },
-        { id: 4, image: orangeHoodie, title2: 'Ethnic', title1: 'Orange', color: '#9A3412' }
+        { id: 4, image: orangeHoodie, title2: 'Ethnic', title1: 'Orange', color: '#E36220' }
     ];
 
     return (
@@ -82,7 +82,7 @@ const Banner = () => {
                                                         <div className="flex gap-4 items-center justify-center">
                                                             <motion.p
                                                                 initial={{ x: -300, y: -500, opacity: 0 }}
-                                                                animate={{ x: window.innerWidth < 768 ? -150 : -250, y: 0, opacity: 1 }}
+                                                                animate={{ x: window.innerWidth < 768 ? -150 : -230, y: 0, opacity: 1 }}
                                                                 exit={{ x: -300, y: -500, opacity: 0 }}
                                                                 transition={{
                                                                     duration: 1.5,
