@@ -10,7 +10,7 @@ const ReviewCard = ({ data }) => {
     }
 
     return (
-        <div className="bg-[#F8FAFC] p-5 rounded-xl shadow-sm border border-[#E5E9EB] w-full max-w-sm">
+        <div className="bg-[#F8FAFC] p-3 rounded-xl shadow-sm border border-[#E5E9EB] w-full max-w-sm">
             
             <div className="mb-3">
                 <h3 className="font-semibold text-lg text-primary">{data.username}</h3>

@@ -1,25 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const AllProductCard = ( {allProducts} ) => {
-
-
+const AllProductCard = ({ allProducts }) => {
     return (
-        <div className="card bg-primary text-white w-96 shadow-sm mx-auto my-5">
-            <figure>
+        <div className="card w-full max-w-sm shadow-md mx-auto flex flex-col h-full bg-white border border-gray-100">
+
+            <figure className="h-64 w-full bg-gray-50 overflow-hidden">
                 <img
                     src={allProducts.image}
-                    alt="Shoes" />
+                    alt={allProducts.title}
+                    className="w-full h-full object-contain p-2 transition-transform duration-300 hover:scale-105"
+                />
             </figure>
-            <div className="card-body ">
-                <h2 className="card-title">
+
+            <div className="card-body flex flex-col flex-grow p-5 text-gray-800">
+                <h2 className="card-title text-lg font-bold line-clamp-1">
                     {allProducts.title}
                 </h2>
-                <p className='font-semibold text-[15px]'>{allProducts.category}</p>
-                <p>Available Quantity : {allProducts.availableQuantity}</p>
-                <div className="card-actions flex justify-center items-center">
-                    <p className='font-semibold text-[15px]'>Price : {allProducts.price}tk</p>
-                    <Link to={`/product/${allProducts._id}`} className='btn bg-[#28C7DB] hover:bg-[#1fa7b8] border-0 text-white'>View Details</Link>
+
+                <div className="space-y-1 flex-grow">
+                    <p className='text-secondary font-medium text-sm uppercase tracking-wider'>
+                        {allProducts.category}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                        Available: <span className="font-semibold">{allProducts.availableQuantity}</span>
+                    </p>
+                </div>
+
+                <div className="card-actions flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+                    <p className='font-bold text-lg text-primary'>
+                        {allProducts.price} <span className="text-xs">TK</span>
+                    </p>
+                    <Link
+                        to={`/product/${allProducts._id}`}
+                        className='btn btn-sm md:btn-md bg-primary hover:bg-primary/70 border-0 text-white'
+                    >
+                        View Details
+                    </Link>
                 </div>
             </div>
         </div>

@@ -19,9 +19,9 @@ const AllProducts = () => {
     )
 
     return (
-        <div className='text-[#1A1A1A]'>
+        <div className='text-[#1A1A1A] max-w-[1440px] mx-auto'>
             <h2 className='text-center pt-8 font-semibold text-2xl'>All Products</h2>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mx-auto py-8'>
+            <div className='grid grid-cols-1 md:grid-cols-4 gap-5 mx-auto py-8'>
                 {
                     isLoading ? 
                     <Loading></Loading>
