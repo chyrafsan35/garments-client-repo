@@ -37,7 +37,7 @@ const AboutUs = () => {
 
             <div className={`bg-gray-50 mx-auto`}>
                 <div className="max-w-[1440px] mx-auto px-6">
-                    <div className="pt-16">
+                    <div className="py-16">
                         <div className="">
                             <p>As we grew, our obsession with detail only deepened. We didn't just look for fabric; we hunted for stories woven into threads. From the breathable cotton of our local fields to the most durable blends, every material is hand-selected to ensure it stands the test of time and weather. For us, a garment is successful only when it feels like a second skin—effortless, comfortable, and remarkably resilient. We believe that true fashion shouldn't just look good in a mirror; it should feel extraordinary against your skin.</p>
                             <br />
@@ -68,26 +68,28 @@ const AboutUs = () => {
 
                             {/* Left Content: Categories */}
                             <div className='col-span-1  text-left'>
-                                <div>
-                                    <h3 className="text-2xl font-bold text-primary mb-4 border-l-4 border-cyan-500 pl-3">Collections</h3>
-                                    <ul className='space-y-4 text-xl font-semibold text-gray-700 list-none'>
-                                        <li className=" flex items-center gap-2">
-                                            Men's Casual
-                                        </li>
-                                        <li className=" flex items-center gap-2">
-                                            Women's Ethnic
-                                        </li>
-                                        <li className=" flex items-center gap-2">
-                                            Kids' Comfort
-                                        </li>
-                                    </ul>
-                                </div>
+                                <ScrollReveal direction="left">
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-primary mb-4 border-l-4 border-cyan-500 pl-3">Collections</h3>
+                                        <ul className='space-y-4 text-xl font-semibold text-gray-700 list-none'>
+                                            <li className=" flex items-center gap-2">
+                                                Men's Casual
+                                            </li>
+                                            <li className=" flex items-center gap-2">
+                                                Women's Ethnic
+                                            </li>
+                                            <li className=" flex items-center gap-2">
+                                                Kids' Comfort
+                                            </li>
+                                        </ul>
+                                    </div>
 
-                                <div className="bg-purple-50 p-6 rounded-2xl border border-purple-100 mt-5">
-                                    <p className="text-primary font-medium text-sm uppercase tracking-wider">Limited Time</p>
-                                    <h4 className="text-2xl font-black text-gray-800">Up to 35% Off!</h4>
-                                    <p className="text-gray-500 text-xs mt-1">On all new arrival items.</p>
-                                </div>
+                                    <div className="bg-purple-50 p-6 rounded-2xl border border-purple-100 mt-5">
+                                        <p className="text-primary font-medium text-sm uppercase tracking-wider">Limited Time</p>
+                                        <h4 className="text-2xl font-black text-gray-800">Up to 35% Off!</h4>
+                                        <p className="text-gray-500 text-xs mt-1">On all new arrival items.</p>
+                                    </div>
+                                </ScrollReveal>
                             </div>
 
                             {/* Middle Content: Main Image */}
@@ -103,37 +105,39 @@ const AboutUs = () => {
 
                             {/* Right Content: Features & CTA */}
                             <div className='col-span-1 '>
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4">
-                                        <div className="bg-cyan-100 p-3 rounded-lg text-cyan-600 font-bold">01</div>
-                                        <div>
-                                            <h4 className="font-bold text-primary">Free Shipping</h4>
-                                            <p className="text-gray-500 text-sm">On orders above 1500 BDT.</p>
+                                <ScrollReveal direction="right">
+                                    <div className="space-y-6">
+                                        <div className="flex items-start gap-4">
+                                            <div className="bg-cyan-100 p-3 rounded-lg text-cyan-600 font-bold">01</div>
+                                            <div>
+                                                <h4 className="font-bold text-primary">Free Shipping</h4>
+                                                <p className="text-gray-500 text-sm">On orders above 1500 BDT.</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-start gap-4">
+                                            <div className="bg-purple-100 p-3 rounded-lg text-primary font-bold">02</div>
+                                            <div>
+                                                <h4 className="font-bold text-primary">Easy Returns</h4>
+                                                <p className="text-gray-500 text-sm">7-day hassle-free exchange.</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-start gap-4">
+                                            <div className="bg-cyan-100 p-3 rounded-lg text-cyan-600 font-bold">03</div>
+                                            <div>
+                                                <h4 className="font-bold text-primary">Secure Payment</h4>
+                                                <p className="text-gray-500 text-sm">bKash, Nagad & COD available.</p>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-start gap-4">
-                                        <div className="bg-purple-100 p-3 rounded-lg text-primary font-bold">02</div>
-                                        <div>
-                                            <h4 className="font-bold text-primary">Easy Returns</h4>
-                                            <p className="text-gray-500 text-sm">7-day hassle-free exchange.</p>
-                                        </div>
+                                    <div className="pt-6">
+                                        <Link to="/all-product" className="block text-center bg-primary text-white py-4 rounded-xl font-bold hover:shadow-2xl hover:bg-[#4d2a75] transition transform active:scale-95">
+                                            Explore Collection
+                                        </Link>
                                     </div>
-
-                                    <div className="flex items-start gap-4">
-                                        <div className="bg-cyan-100 p-3 rounded-lg text-cyan-600 font-bold">03</div>
-                                        <div>
-                                            <h4 className="font-bold text-primary">Secure Payment</h4>
-                                            <p className="text-gray-500 text-sm">bKash, Nagad & COD available.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="pt-6">
-                                    <Link to="/all-product" className="block text-center bg-primary text-white py-4 rounded-xl font-bold hover:shadow-2xl hover:bg-[#4d2a75] transition transform active:scale-95">
-                                        Explore Collection
-                                    </Link>
-                                </div>
+                                </ScrollReveal>
                             </div>
 
                         </div>
@@ -151,18 +155,15 @@ const AboutUs = () => {
                             </div>
 
                             <div class=" px-6 mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition text-center border-t-4 border-purple-600">
-                                    <div class="text-4xl mb-4">💎</div>
+                                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition text-center ">
                                     <h4 class="text-xl font-bold text-[#3b1e5a] mb-2">Premium Quality</h4>
                                     <p class="text-gray-500 text-sm">We use the finest fabrics to ensure longevity and comfort in every wear.</p>
                                 </div>
-                                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition text-center border-t-4 border-cyan-400">
-                                    <div class="text-4xl mb-4">🚀</div>
+                                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition text-center">
                                     <h4 class="text-xl font-bold text-[#3b1e5a] mb-2">Fast Delivery</h4>
                                     <p class="text-gray-500 text-sm">Your fashion shouldn't wait. We ensure quick shipping across Bangladesh.</p>
                                 </div>
-                                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition text-center border-t-4 border-purple-600">
-                                    <div class="text-4xl mb-4">🤝</div>
+                                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition text-center ">
                                     <h4 class="text-xl font-bold text-[#3b1e5a] mb-2">Customer First</h4>
                                     <p class="text-gray-500 text-sm">Our support team is always ready to assist you for a smooth experience.</p>
                                 </div>
@@ -207,7 +208,7 @@ const AboutUs = () => {
                 </div>
             </div>
 
-            <div class="py-16 mx-auto text-center"> 
+            <div class="py-16 mx-auto text-center">
                 <h3 class="text-2xl font-bold text-[#3b1e5a] mb-6">Ready to upgrade your wardrobe?</h3>
                 <Link to="/all-product" class="bg-[#3b1e5a] text-white px-10 py-4 rounded-full font-bold hover:bg-purple-800 transition shadow-xl inline-block">
                     Shop Our Collection

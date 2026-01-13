@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const ScrollReveal = ({ children }) => {
-
+const ScrollReveal = ({ children, direction = 'up' }) => {
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef(null);
 
@@ -19,9 +18,20 @@ const ScrollReveal = ({ children }) => {
         return () => observer.disconnect();
     }, []);
 
+    const getVariant = () => {
+        switch (direction) {
+            case 'left':
+                return isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20';
+            case 'right':
+                return isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20';
+            case 'up':
+            default:
+                return isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20';
+        }
+    };
+
     return (
-        <div ref={ref} className={`transition-all duration-1000 ease-out 
-            ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+        <div ref={ref} className={`transition-all duration-1000 ease-out ${getVariant()}`}>
             {children}
         </div>
     );
