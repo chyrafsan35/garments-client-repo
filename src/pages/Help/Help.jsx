@@ -1,16 +1,16 @@
 import React from 'react';
+import bannerText1 from '../../assets/hero-pattern1.png';
 
 const Help = () => {
     return (
         <div class="min-h-screen bg-gray-50 font-sans">
 
             <div class="bg-gradient-to-r from-primary to-[#6a3f97] py-20 px-6 text-center text-white relative overflow-hidden">
-                <div class="absolute inset-0 opacity-10 pointer-events-none">
-                    <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <circle cx="10" cy="10" r="20" fill="white" />
-                        <circle cx="90" cy="80" r="25" fill="white" />
-                    </svg>
-                </div>
+
+                <div
+                    className='absolute inset-0 w-full h-full bg-no-repeat bg-cover bg-center mix-blend-luminosity opacity-30 z-10 pointer-events-none'
+                    style={{ backgroundImage: `url(${bannerText1})` }}
+                ></div>
 
                 <h1 class="text-4xl md:text-5xl font-bold mb-4 relative z-10">Help & Support</h1>
                 <p class="text-purple-200 text-lg max-w-2xl mx-auto relative z-10">

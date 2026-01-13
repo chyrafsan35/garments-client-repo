@@ -1,15 +1,24 @@
 import React from 'react';
+import bannerText1 from '../../assets/hero-pattern1.png';
 
 const Feedback = () => {
     return (
         <div class="min-h-screen bg-gray-50 font-sans pb-12">
 
-            <div class="bg-gradient-to-r from-primary to-[#6a3f97] py-20 px-6 text-center text-white">
-                <h1 class="text-3xl md:text-4xl font-bold mb-3">Share Your Experience</h1>
-                <p class="text-purple-200 max-w-lg mx-auto">We value your feedback! Let us know how we can improve our products and services.</p>
+            <div class="bg-gradient-to-r from-primary to-[#6a3f97] py-20 px-6 text-center text-white relative">
+
+                <div
+                    className='absolute inset-0 w-full h-full bg-no-repeat bg-cover bg-center mix-blend-luminosity opacity-30 z-10 pointer-events-none'
+                    style={{ backgroundImage: `url(${bannerText1})` }}
+                ></div>
+
+                <div className="z-20 relative">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-3">Share Your Experience</h1>
+                    <p class="text-purple-200 max-w-lg mx-auto">We value your feedback! Let us know how we can improve our products and services.</p>
+                </div>
             </div>
 
-            <div class="max-w-3xl mx-auto px-6 -mt-10">
+            <div class="max-w-3xl mx-auto px-6 -mt-10 relative z-30">
                 <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12">
                     <form action="#" class="space-y-6">
 
@@ -47,7 +56,7 @@ const Feedback = () => {
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Your Comments</label>
-                            <textarea rows="5"  class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 outline-none transition"></textarea>
+                            <textarea rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100 outline-none transition"></textarea>
                         </div>
 
                         <div class="pt-4">
