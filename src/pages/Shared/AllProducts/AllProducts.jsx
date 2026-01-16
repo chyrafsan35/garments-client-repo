@@ -10,9 +10,10 @@ const AllProducts = () => {
     const [totalPage, setTotalPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const [sort, setSort] = useState("price");
-    const [order, setOrder] = useState("asc"); // Default order set to asc
+    const [order, setOrder] = useState("asc"); 
     const [searchText, setSearchText] = useState("");
-    const limit = 8; // প্রতি পেজে ৮টি প্রোডাক্ট দেখালে গ্রিড সুন্দর দেখায়
+    const limit = 8; 
+    console.log(totalProducts)
 
     const sortByPrice = (e) => {
         const value = e.target.value;
@@ -35,7 +36,6 @@ const AllProducts = () => {
             .then(data => {
                 setProducts(data.products);
                 setTotalProducts(data.total);
-                // সরাসরি data.total ব্যবহার করা ভালো যাতে রি-রেন্ডার কম হয়
                 setTotalPage(Math.ceil(data.total / limit));
                 setLoading(false);
             })
@@ -84,7 +84,6 @@ const AllProducts = () => {
                     </div>
                 </div>
 
-                {/* Products Grid */}
                 {loading ? (
                     <div className='flex justify-center items-center h-64'>
                         <Loading />
@@ -101,7 +100,6 @@ const AllProducts = () => {
                     </div>
                 )}
 
-                {/* Pagination Section */}
                 {totalPage > 1 && (
                     <div className='flex justify-center items-center mt-16 gap-2'>
                         <button

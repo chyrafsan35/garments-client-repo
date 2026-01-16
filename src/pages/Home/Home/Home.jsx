@@ -3,6 +3,7 @@ import Banner from './Banner';
 import Workflow from '../Workflow/Workflow';
 import Feedbacks from '../Feedbacks/Feedbacks';
 import HomeProducts from './HomeProducts';
+import OurStory from '../../OurStory/OurStory';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <div className='max-w-[1440px] mx-auto'>
                 <HomeProducts></HomeProducts>
                 <Workflow></Workflow>
+                <OurStory></OurStory>
                 <Feedbacks></Feedbacks>
             </div>
         </div>
