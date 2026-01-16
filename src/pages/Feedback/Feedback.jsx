@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bannerText1 from '../../assets/hero-pattern1.png';
+import { FaStar } from 'react-icons/fa';
 
 const Feedback = () => {
+    const [rating, setRating] = useState(0);
     return (
         <div class="min-h-screen bg-gray-50 font-sans pb-12">
 
@@ -24,12 +26,21 @@ const Feedback = () => {
 
                         <div class="text-center mb-8">
                             <label class="block text-gray-700 font-semibold mb-3">How would you rate our quality?</label>
-                            <div class="flex justify-center gap-2 text-3xl text-gray-300">
-                                <button type="button" class="hover:text-yellow-400 transition">★</button>
-                                <button type="button" class="hover:text-yellow-400 transition">★</button>
-                                <button type="button" class="hover:text-yellow-400 transition">★</button>
-                                <button type="button" class="hover:text-yellow-400 transition">★</button>
-                                <button type="button" class="text-yellow-400">★</button> </div>
+                            <div className='flex gap-2 justify-center items-center'>
+                                {
+                                    [...Array(5)].map((_, index) => {
+                                        const starValue = index + 1;
+                                        return (
+                                            <button className='transition-transform duration-200 hover:scale-125' index={starValue} onClick={() => { setRating(starValue) }}>
+                                                <FaStar size={25} className={`cursor-pointer transition-colors duration-200 ${starValue <= rating ?
+                                                    'text-primary shadow-primary' :
+                                                    'text-gray-200'
+                                                    }`} />
+                                            </button>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

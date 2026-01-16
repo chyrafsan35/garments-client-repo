@@ -221,6 +221,7 @@ const AboutUs = () => {
                 <Link to="/all-product" class="bg-[#3b1e5a] text-white px-10 py-4 rounded-full font-bold hover:bg-purple-800 transition shadow-xl inline-block">
                     Shop Our Collection
                 </Link>
+                <p>Stats..................</p>
             </div>
         </div>
     );
