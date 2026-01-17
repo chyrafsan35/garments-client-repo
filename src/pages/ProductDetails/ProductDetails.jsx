@@ -4,12 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router';
 import Loading from '../../components/Loading/Loading';
 import useAuth from '../../hook/useAuth';
+import axios from 'axios';
 
 const ProductDetails = () => {
 
     const { id } = useParams();
     const { user } = useAuth();
-    console.log('User email is : ', user.email)
 
     const useAxios = axiosSecure();
     const { data: info = {}, isLoading } = useQuery({
@@ -19,14 +19,13 @@ const ProductDetails = () => {
             console.log(info)
             return res.data;
         },
-        enabled: !!user?.email
     })
 
     const { data: userInfo = {} } = useQuery({
         queryKey: ['user-info', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
-            const res = await useAxios.get(`/users/${user.email}`);
+            const res = await axios.get(`/users/${user?.email}`);
             return res.data;
         }
     })
@@ -70,16 +69,24 @@ const ProductDetails = () => {
                                     <p><strong>Minimum Order:</strong> {info.minQuantity}</p>
                                 </div>
 
-                                {
-                                    userInfo.status !== 'Rejected' ?
-                                        <button className="mt-4 px-8 py-3 bg-primary text-white rounded-lg text-lg hover:bg-[#09324E] transition btn border-0 ">
-                                            <Link to={'/order'} state={{ product: info }}>Order Now</Link>
+                                {!user ? (
+                                    <Link to="/login">
+                                        <button className="mt-4 px-8 py-3 bg-primary text-white rounded-lg text-lg btn border-0">
+                                            Please Login to Order
                                         </button>
-                                        :
-                                        <button disabled className="mt-4 px-8 py-3 bg-primary text-white rounded-lg text-lg hover:bg-[#09324E] transition btn border-0 disabled:opacity-40 disabled:cursor-not-allowed">
-                                            <Link to={'/order'} state={{ product: info }}>Order Now</Link>
+                                    </Link>
+                                ) : userInfo?.status === 'Rejected' ? (
+                                    <button disabled className="mt-4 px-8 py-3 bg-gray-400 text-white rounded-lg text-lg cursor-not-allowed opacity-50">
+                                        Order Disabled (Rejected)
+                                    </button>
+                                ) : (
+
+                                    <Link to={'/order'} state={{ product: info }}>
+                                        <button className="mt-4 px-8 py-3 bg-primary text-white rounded-lg text-lg hover:bg-[#09324E] transition btn border-0">
+                                            Order Now
                                         </button>
-                                }
+                                    </Link>
+                                )}
                             </div>
 
                         </div>
