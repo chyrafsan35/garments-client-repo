@@ -31,7 +31,7 @@ const Feedback = () => {
                                     [...Array(5)].map((_, index) => {
                                         const starValue = index + 1;
                                         return (
-                                            <button className='transition-transform duration-200 hover:scale-125' index={starValue} onClick={() => { setRating(starValue) }}>
+                                            <button type='button' className='transition-transform duration-200 hover:scale-125' index={starValue} onClick={() => { setRating(starValue) }}>
                                                 <FaStar size={25} className={`cursor-pointer transition-colors duration-200 ${starValue <= rating ?
                                                     'text-primary shadow-primary' :
                                                     'text-gray-200'
