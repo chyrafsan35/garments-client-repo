@@ -3,9 +3,8 @@
 This website helps management of garment products. Admin, Manager and Buyer roles are available only. Manager can add products and can edit these. They can accept buyers booking request. Also managers will provide with tracking information of parcels. It's a user-friendly and interactive website. 
 
 <div align="center" style="display: flex; overflow-x: auto; gap: 10px;">
-  <img src="https://i.ibb.co.com/kV2Td6gm/Screenshot-2026-01-01-152940.png" />
-  <img src="https://i.ibb.co.com/JF2kZT0z/Screenshot-2026-01-01-153545.png" />
-  <img src="https://i.ibb.co.com/tpSwfR4V/Screenshot-2026-01-01-153638.png" />
+  <img src="https://i.ibb.co.com/sphCXsWB/Screenshot-2026-01-16-121419.png" />
+  <img src="https://i.ibb.co.com/5XKj3qxN/Screenshot-2026-01-16-121522.png" />
 </div>
 
 ## Technologies Used
