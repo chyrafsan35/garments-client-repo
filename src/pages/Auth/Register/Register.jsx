@@ -84,15 +84,15 @@ const Register = () => {
                 <form className='card-body' onSubmit={handleSubmit(handleForms)}>
                     <fieldset className="fieldset">
                         <label className="label">Name</label>
-                        <input type="name" {...register("name", { required: true })} className="input" placeholder="Name" />
+                        <input type="name" {...register("name", { required: true })} className="input"  />
                         {errors.name?.type === 'required' && <p className='text-red-500'>Name is required</p>}
 
                         <label className="label">Email</label>
-                        <input type="email" {...register("email", { required: true })} className="input" placeholder="Email" />
+                        <input type="email" {...register("email", { required: true })} className="input"  />
                         {errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>}
 
                         <label className="label">Photo</label>
-                        <input type="file" {...register("photo", { required: true })} className="file-input file-input-primary" placeholder="Your Photo" />
+                        <input type="file" {...register("photo", { required: true })} className="file-input file-input-primary"  />
                         {errors.file?.type === 'required' && <p className='text-red-500'>Photo is required</p>}
 
                         <label className="label">Select role</label>

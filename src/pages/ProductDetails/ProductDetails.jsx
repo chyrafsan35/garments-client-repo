@@ -40,7 +40,6 @@ const ProductDetails = () => {
                     <div className="max-w-6xl mx-auto px-4 py-12">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white shadow-lg rounded-xl p-8 items-center">
 
-                            {/* Image Section */}
                             <div className="flex justify-center items-center">
                                 <img
                                     src={info.image}
@@ -49,7 +48,6 @@ const ProductDetails = () => {
                                 />
                             </div>
 
-                            {/* Details Section */}
                             <div className="space-y-4">
                                 <span className="inline-block bg-secondary/30 text-primary px-3 py-1 rounded-full text-sm">
                                     {info.category}

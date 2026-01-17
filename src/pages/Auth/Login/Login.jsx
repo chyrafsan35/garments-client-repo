@@ -33,7 +33,7 @@ const Login = () => {
                 <form className='card-body' onSubmit={handleSubmit(handleLogin)}>
                     <fieldset className="fieldset">
                         <label className="label">Email</label>
-                        <input type="email" {...register("email", { required: true })} className="input" placeholder="Email" />
+                        <input type="email" {...register("email", { required: true })} className="input"  />
                         {errors.email?.type === 'required' && <p className='text-red-500'>Email is required</p>}
 
                         <label className="label">Password</label>
@@ -42,7 +42,6 @@ const Login = () => {
                                 type={toggle ? "password" : "text"}
                                 {...register("password", { required: true })}
                                 className="input w-full"
-                                placeholder="Password"
                             />
 
                             {
