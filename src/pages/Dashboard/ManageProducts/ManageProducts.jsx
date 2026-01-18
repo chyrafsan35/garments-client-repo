@@ -222,7 +222,6 @@ const ManageProducts = () => {
                                             {...register("title")}
                                             defaultValue={selectedOrder?.title}
                                             className="input input-bordered w-full"
-                                            placeholder="Product title"
                                         />
                                     </div>
 
@@ -237,7 +236,6 @@ const ManageProducts = () => {
                                             defaultValue={selectedOrder?.description}
                                             className="textarea textarea-bordered w-full"
                                             rows={4}
-                                            placeholder="Short product description"
                                         />
                                     </div>
 
@@ -253,7 +251,6 @@ const ManageProducts = () => {
                                                 {...register("price")}
                                                 defaultValue={selectedOrder?.price}
                                                 className="input input-bordered w-full"
-                                                placeholder="৳ Price"
                                             />
                                         </div>
 
@@ -268,7 +265,6 @@ const ManageProducts = () => {
                                                 {...register("category")}
                                                 defaultValue={selectedOrder?.category}
                                                 className="input input-bordered w-full"
-                                                placeholder="Category"
                                             />
                                         </div>
                                     </div>
@@ -284,7 +280,6 @@ const ManageProducts = () => {
                                             {...register("demo")}
                                             defaultValue={selectedOrder?.demo}
                                             className="input input-bordered w-full"
-                                            placeholder="https://youtube.com/..."
                                         />
                                         <span className="text-xs text-gray-500 mt-1">
                                             Optional – YouTube or Vimeo link
