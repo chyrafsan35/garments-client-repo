@@ -52,6 +52,7 @@ const Order = () => {
         const orderData = {
             ...data,
             createdBy: product.createdBy,
+            productImage: product?.image,
             orderStatus : 'Pending'  
         };
         useAxios.post('/my-orders', orderData)
