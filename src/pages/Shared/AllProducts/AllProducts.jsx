@@ -10,18 +10,25 @@ const AllProducts = () => {
     const [totalPage, setTotalPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const [sort, setSort] = useState("price");
-    const [order, setOrder] = useState("asc"); 
+    const [category, setCategory] = useState(""); 
+    const [order, setOrder] = useState("asc");
     const [searchText, setSearchText] = useState("");
-    const limit = 8; 
+    const limit = 8;
     console.log(totalProducts)
 
-    const sortByPrice = (e) => {
+    const sortByPC = (e) => {
         const value = e.target.value;
         if (value === "default") return;
-        const [sortField, sortOrder] = value.split('-');
-        setSort(sortField);
-        setOrder(sortOrder);
-        setCurrentPage(0);
+
+        if (value.includes("-")) {
+            const [sortField, sortOrder] = value.split("-");
+            setSort(sortField);
+            setOrder(sortOrder);
+            setCurrentPage(0);
+        } else {
+            setCategory(value);
+            setCurrentPage(0);
+        }
     };
 
     const handleSearch = (e) => {
@@ -31,7 +38,7 @@ const AllProducts = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`https://server-eight-eta-49.vercel.app/products?limit=${limit}&skip=${currentPage * limit}&sort=${sort}&order=${order}&search=${searchText}`)
+        fetch(`https://server-eight-eta-49.vercel.app/products?limit=${limit}&skip=${currentPage * limit}&sort=${sort}&order=${order}&search=${searchText}&category=${category}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.products);
@@ -43,20 +50,39 @@ const AllProducts = () => {
                 console.error(err);
                 setLoading(false);
             });
-    }, [currentPage, sort, order, searchText]);
+    }, [currentPage, sort, order, searchText, category]);
 
     return (
         <div className='bg-gray-50 min-h-screen pb-12'>
             <div className='max-w-[1440px] mx-auto px-4'>
-                {/* Header Section */}
                 <header className='text-center py-10'>
                     <h2 className='text-4xl font-bold text-gray-800 mb-2'>Explore Our Collection</h2>
                     <p className='text-gray-500'>Find the best products tailored just for you</p>
                 </header>
 
-                {/* Filter & Search Bar */}
                 <div className='flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm mb-10'>
-                    {/* Search Input */}
+
+                    <div className="flex items-center gap-3 w-full md:w-auto">
+                        <span className='font-medium text-gray-600 hidden sm:block'>Sort By:</span>
+                        <select
+                            onChange={sortByPC}
+                            defaultValue="default"
+                            className="select select-bordered w-full md:w-48 border-gray-200 focus:outline-primary"
+                        >
+                            <option value="default" disabled>Category Filtering</option>
+                            <option value='t_shirt'>T-Shirt</option>
+                            <option value='polo_shirt'>Polo-Shirt</option>
+                            <option value='sweat_shirt'>Sweatshirt</option>
+                            <option value='hoodie'>Hoodie</option>
+                            <option value='jacket'>Jacket</option>
+                            <option value='sportswear'>Sportswear</option>
+                            <option value='shorts'>Shorts</option>
+                            <option value='kids_wear'>Kids Wear</option>
+                            <option value='jeans'>Jeans</option>
+                            <option value='denim'>Denim</option>
+                        </select>
+                    </div>
+
                     <div className="relative w-full md:w-1/3">
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 text-xl">
                             <IoMdSearch />
@@ -69,11 +95,10 @@ const AllProducts = () => {
                         />
                     </div>
 
-                    {/* Sort Dropdown */}
                     <div className="flex items-center gap-3 w-full md:w-auto">
                         <span className='font-medium text-gray-600 hidden sm:block'>Sort By:</span>
                         <select
-                            onChange={sortByPrice}
+                            onChange={sortByPC}
                             defaultValue="default"
                             className="select select-bordered w-full md:w-48 border-gray-200 focus:outline-primary"
                         >
