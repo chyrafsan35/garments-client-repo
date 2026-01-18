@@ -27,6 +27,7 @@ import AboutUs from "../pages/AboutUs/AboutUs";
 import Contact from "../pages/Contact/Contact";
 import Feedback from "../pages/Feedback/Feedback";
 import Help from "../pages/Help/Help";
+import CustomerDashboard from "../pages/Dashboard/CustomerDashboard/CustomerDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
       <DashboardLayout></DashboardLayout>
     </PrivateRoute>,
     children: [
+      {
+        index: true,
+        Component: CustomerDashboard
+      },
       {
         path: 'my-orders',
         Component: MyOrders
