@@ -9,7 +9,9 @@ import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 
+
 const ManageProducts = () => {
+    const [submitting, setSubmitting] = useState(false);
 
     const editModalRef = useRef();
     const { register, handleSubmit } = useForm();
@@ -33,36 +35,46 @@ const ManageProducts = () => {
     }
 
     const handleEditProduct = async (data) => {
-        let imageURL = selectedOrder.image;
 
-        if (data.photo && data.photo.length > 0) {
-            const formData = new FormData();
-            formData.append('image', data.photo[0]);
+        try {
+            setSubmitting(true);
+            let imageURL = selectedOrder.image;
 
-            const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`;
-            const imgRes = await axios.post(image_API_URL, formData);
-            imageURL = imgRes.data.data.url;
+            if (data.photo && data.photo.length > 0) {
+                const formData = new FormData();
+                formData.append('image', data.photo[0]);
+
+                const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`;
+                const imgRes = await axios.post(image_API_URL, formData);
+                imageURL = imgRes.data.data.url;
+            }
+
+            const productInfo = {
+                title: data?.title || selectedOrder.title,
+                description: data?.description || selectedOrder.description,
+                price: data?.price || selectedOrder.price,
+                category: data?.category || selectedOrder.category,
+                image: imageURL,
+                video: data?.demo || selectedOrder.video,
+                paymentOption: data?.paymentOption || ''
+            }
+
+            await useAxios.patch(`/products/${selectedOrder._id}`, productInfo)
+            editModalRef.current.close();
+            Swal.fire("Product Updated!", "", "success");
+            refetch();
+        } catch (err) {
+            if (err.response?.status === 403) {
+                Swal.fire(
+                    "Couldn't update !",
+                    'Something went wrong.',
+                    'error'
+                );
+            }
+        } finally {
+            setSubmitting(false);
         }
-
-        const productInfo = {
-            title: data?.title || selectedOrder.title,
-            description: data?.description || selectedOrder.description,
-            price: data?.price || selectedOrder.price,
-            category: data?.category || selectedOrder.category,
-            image: imageURL,
-            video: data?.demo || selectedOrder.video,
-            paymentOption: data?.paymentOption || ''
-        }
-
-        useAxios.patch(`/products/${selectedOrder._id}`, productInfo)
-            .then(res => {
-                editModalRef.current.close();
-                if (res.data.modifiedCount) {
-                    Swal.fire("Product Updated!", "", "success");
-                    refetch()
-                }
-            })
-    }
+    };
 
     const handleDelete = async (id) => {
         Swal.fire({
@@ -304,9 +316,19 @@ const ManageProducts = () => {
 
                                 <button
                                     type="submit"
-                                    className="btn bg-primary hover:bg-[#0f4c75] text-white px-8"
+                                    disabled={submitting}
+                                    className="btn bg-primary hover:bg-primary/80 text-white px-8 disabled:opacity-50"
                                 >
-                                    Update Product
+                                    {
+                                        submitting ? (
+                                            <>
+                                                <span className="loading loading-spinner loading-sm"></span>
+                                                <span className="ml-2">Updating...</span>
+                                            </>
+                                        ) : (
+                                            "Update Product"
+                                        )
+                                    }
                                 </button>
                             </div>
                         </form>

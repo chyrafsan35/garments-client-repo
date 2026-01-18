@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../hook/axiosSecure';
 import Loading from '../../../components/Loading/Loading';
@@ -12,50 +12,56 @@ const AddProducts = () => {
     const useAxios = useAxiosSecure();
     const { loading, user } = useAuth();
     const { status = user.status } = useRole();
+    const [submitting, setSubmitting] = useState(false);
     console.log({ status })
 
     const handleAddProduct = async (data) => {
-        const formData = new FormData();
-        formData.append('image', data.image[0]);
+        try {
+            setSubmitting(true);
 
-        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`;
-        const imgRes = await axios.post(image_API_URL, formData);
-        const imageURL = imgRes.data.data.url;
+            const formData = new FormData();
+            formData.append('image', data.image[0]);
 
-        const productData = {
-            title: data.title,
-            description: data.description,
-            category: data.category,
-            price: data.price,
-            availableQuantity: data.availableQuantity,
-            minQuantity: data.minQuantity,
-            paymentOption: data.paymentOption,
-            video: data.video || '',
-            image: imageURL,
-            showOnHome: false,
-            createdBy: user.email
-        };
+            const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`;
+            const imgRes = await axios.post(image_API_URL, formData);
+            const imageURL = imgRes.data.data.url;
 
-        useAxios.post('/products', productData)
-            .then(res => {
-                Swal.fire({
-                    title: "Product added!",
-                    icon: "success",
-                    draggable: true
-                });
-                console.log(res.data)
-                reset()
-            })
-            .catch(err => {
-                if (err.response?.status === 403) {
-                    Swal.fire(
-                        'Access Denied',
-                        'Your account is rejected. You cannot add products.',
-                        'error'
-                    );
-                }
-            })
-    }
+            const productData = {
+                title: data.title,
+                description: data.description,
+                category: data.category,
+                price: data.price,
+                availableQuantity: data.availableQuantity,
+                minQuantity: data.minQuantity,
+                paymentOption: data.paymentOption,
+                video: data.video || '',
+                image: imageURL,
+                showOnHome: false,
+                createdBy: user.email
+            };
+
+            await useAxios.post('/products', productData);
+
+            Swal.fire({
+                title: "Product added!",
+                icon: "success",
+            });
+
+            reset();
+        } catch (err) {
+            if (err.response?.status === 403) {
+                Swal.fire(
+                    'Access Denied',
+                    'Your account is rejected. You cannot add products.',
+                    'error'
+                );
+            }
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    if (loading) return <Loading />;
 
     return (
         <div className="p-6 max-w-6xl mx-auto">
@@ -201,16 +207,21 @@ const AddProducts = () => {
                             </div>
 
                             <div className="flex justify-end pt-6">
-                                {
-                                    status !== 'Rejected' ?
-                                        <button className="btn bg-primary hover:bg-[#0f4c75] text-white px-10">
-                                            Add Product
-                                        </button>
-                                        :
-                                        <button disabled className=" px-10 bg-primary text-white rounded-lg text-lg hover:bg-[#0f4c75] transition btn border-0 disabled:opacity-40 disabled:cursor-not-allowed">
-                                            Add Product
-                                        </button>
-                                }
+                                <button
+                                    disabled={submitting || status === 'Rejected'}
+                                    className="btn bg-primary text-white px-10 disabled:opacity-50"
+                                >
+                                    {
+                                        submitting ? (
+                                            <>
+                                                <span className="loading loading-spinner loading-sm"></span>
+                                                <span className="ml-2">Adding...</span>
+                                            </>
+                                        ) : (
+                                            "Add Product"
+                                        )
+                                    }
+                                </button>
                             </div>
 
                         </form>

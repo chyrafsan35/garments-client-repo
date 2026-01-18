@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const AdminAllProducts = () => {
+    const [submitting, setSubmitting] = useState(false);
 
     const editModalRef = useRef();
     const { register, handleSubmit } = useForm();
@@ -30,35 +31,44 @@ const AdminAllProducts = () => {
     }
 
     const handleEditProduct = async (data) => {
-        let imageURL = selectedOrder.image;
+        try {
+            setSubmitting(true)
+            let imageURL = selectedOrder.image;
 
-        if (data.photo && data.photo.length > 0) {
-            const formData = new FormData();
-            formData.append('image', data.photo[0]);
+            if (data.photo && data.photo.length > 0) {
+                const formData = new FormData();
+                formData.append('image', data.photo[0]);
 
-            const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`;
-            const imgRes = await axios.post(image_API_URL, formData);
-            imageURL = imgRes.data.data.url;
+                const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb}`;
+                const imgRes = await axios.post(image_API_URL, formData);
+                imageURL = imgRes.data.data.url;
+            }
+
+            const productInfo = {
+                title: data?.title || selectedOrder.title,
+                description: data?.description || selectedOrder.description,
+                price: data?.price || selectedOrder.price,
+                category: data?.category || selectedOrder.category,
+                image: imageURL,
+                video: data?.demo || selectedOrder.video,
+                paymentOption: data?.paymentOption || ''
+            }
+
+            await useAxios.patch(`/products/${selectedOrder._id}`, productInfo)
+            editModalRef.current.close();
+            Swal.fire("Product Updated!", "", "success");
+            refetch();
+        } catch (err) {
+            if (err.response?.status === 403) {
+                Swal.fire(
+                    "Couldn't update !",
+                    'Something went wrong.',
+                    'error'
+                );
+            }
+        } finally {
+            setSubmitting(false);
         }
-
-        const productInfo = {
-            title: data?.title || selectedOrder.title,
-            description: data?.description || selectedOrder.description,
-            price: data?.price || selectedOrder.price,
-            category: data?.category || selectedOrder.category,
-            image: imageURL,
-            video: data?.demo || selectedOrder.video,
-            paymentOption: data?.paymentOption || ''
-        }
-
-        useAxios.patch(`/products/${selectedOrder._id}`, productInfo)
-            .then(res => {
-                editModalRef.current.close();
-                if (res.data.modifiedCount) {
-                    Swal.fire("Product Updated!", "", "success");
-                    refetch()
-                }
-            })
     }
 
     const handleToggle = async (order) => {
@@ -69,7 +79,7 @@ const AdminAllProducts = () => {
             })
     }
 
-    const handleDelete = async (order) => {
+    const handleDelete = async (orderId) => {
         Swal.fire({
             title: "Are you sure?",
             text: "This product will be permanently deleted.",
@@ -78,17 +88,18 @@ const AdminAllProducts = () => {
             confirmButtonColor: "#2563eb",
             cancelButtonColor: "#dc2626",
             confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                useAxios.delete(`/products/${order._id}`)
-                    .then(res => {
-                        if (res.data.deletedCount) {
-                            refetch();
-                            Swal.fire("Deleted!", "Your product has been deleted.", "success");
-                        }
-                    })
-            }
-        });
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    useAxios.delete(`/products/${orderId}`)
+                        .then(res => {
+                            if (res.data.deletedCount) {
+                                refetch();
+                                Swal.fire("Deleted!", "Your product has been deleted.", "success");
+                            }
+                        })
+                }
+            });
     }
 
     return (
@@ -329,9 +340,19 @@ const AdminAllProducts = () => {
 
                                 <button
                                     type="submit"
-                                    className="btn bg-primary hover:bg-[#0f4c75] text-white px-8"
+                                    disabled={submitting}
+                                    className="btn bg-primary hover:bg-primary/80 text-white px-8 disabled:opacity-50"
                                 >
-                                    Update Product
+                                    {
+                                        submitting ? (
+                                            <>
+                                                <span className="loading loading-spinner loading-sm"></span>
+                                                <span className="ml-2">Updating...</span>
+                                            </>
+                                        ) : (
+                                            "Update Product"
+                                        )
+                                    }
                                 </button>
                             </div>
                         </form>
