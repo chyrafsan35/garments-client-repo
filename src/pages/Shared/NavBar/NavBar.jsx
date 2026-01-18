@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '../../../components/Logo/Logo';
 import { Link, NavLink } from 'react-router';
 import useAuth from '../../../hook/useAuth';
 
 const NavBar = () => {
+
+    const [theme, setTheme] = useState(
+        localStorage.getItem("theme") || "light"
+    );
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }, [theme]);
+
+    const handleThemeToggle = (e) => {
+        setTheme(e.target.checked ? "swap" : "light");
+    };
 
     const { user, logOut } = useAuth();
     const handleLogOut = () => {
@@ -24,7 +37,7 @@ const NavBar = () => {
                     <li><NavLink to={'help'}>Help</NavLink></li>
                     <li><NavLink to={'feedback'}>Feedback</NavLink></li>
                     <li><NavLink to={'contact'}>Contact</NavLink></li>
-                </> 
+                </>
                 :
                 <>
                     <li><NavLink to={'about-us'}>About Us</NavLink></li>
@@ -54,24 +67,41 @@ const NavBar = () => {
                         {links}
                     </ul>
                 </div>
+
+
                 <div className="navbar-end">
-                    {
-                        user ?
-                            <div className='flex gap-2 justify-center items-center'>
-                                <div className="avatar">
-                                    <div className="w-10 md:w-[45px] rounded-full ring ring-white ring-offset-base-100 ring-offset-2">
-                                        <img
-                                            src={user.photoURL}
-                                            alt="user"
-                                            className="object-cover"
-                                        />
-                                    </div>
+
+                    {user ? (
+                        <div className="relative group">
+                            <div className="btn btn-ghost btn-circle avatar cursor-pointer">
+                                <div className="w-10 md:w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 overflow-hidden">
+                                    <img src={user.photoURL} alt="user" className="object-cover w-full h-full" />
                                 </div>
-                                <Link className="btn bg-primary hover:bg-[#0f4c75] text-white" onClick={handleLogOut}>Logout</Link>
                             </div>
-                            :
-                            <Link className="btn bg-primary hover:bg-[#0f4c75] text-white" to={'/login'}>Login</Link>
-                    }
+                            <ul className="absolute right-0 mt-2 w-44 p-2 bg-base-100 rounded-lg shadow-lg
+                     opacity-0 invisible group-hover:visible group-hover:opacity-100
+                     transition-all duration-200 z-50">
+                                <li>
+                                    <span className="block text-gray-700 font-medium">{user.displayName || "User"}</span>
+                                </li>
+                                <li>
+                                    <span className="block text-gray-500 text-sm">{user.email}</span>
+                                </li>
+                                <li>
+                                    <button
+                                        onClick={handleLogOut}
+                                        className="btn btn-sm bg-primary hover:bg-primary-focus text-white w-full"
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <Link className="btn bg-primary hover:bg-primary-focus text-white" to={"/login"}>
+                            Login
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>

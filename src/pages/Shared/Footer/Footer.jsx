@@ -1,8 +1,8 @@
 import React from 'react';
 import Logo from '../../../components/Logo/Logo';
-import { FaXTwitter } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa6";
+import { CiMail } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa6";
+import { FaGithub } from 'react-icons/fa';
 
 const Footer = () => {
     return (
@@ -18,14 +18,14 @@ const Footer = () => {
             </aside>
             <nav>
                 <div className="grid grid-flow-col gap-4">
-                    <a>
-                        <FaFacebookF />
+                    <a href='https://github.com/chyrafsan35' target='_blank'>
+                        <FaGithub />
                     </a>
-                    <a>
+                    <a href='https://www.instagram.com/chy_rafsan35/' target='_blank'>
                         <FaInstagram />
                     </a>
-                    <a>
-                        <FaXTwitter />
+                    <a href='mailto:mrcplabon@gmail.com' target='_blank'>
+                        <CiMail />
                     </a>
                 </div>
             </nav>

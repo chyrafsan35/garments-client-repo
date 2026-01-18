@@ -26,17 +26,17 @@ const Contact = () => {
                             <div class="flex items-center gap-4">
                                 <div class="bg-cyan-50 p-3 rounded-full text-cyan-600 text-xl">📞</div>
                                 <div>
-                                    <h4 class="font-bold text-[#3b1e5a]">Call Us</h4>
+                                    <h4 class="font-bold text-primary">Call Us</h4>
                                     <p class="text-gray-600 text-sm">+880 1919-635953</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-purple-600">
+                        <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-primary">
                             <div class="flex items-center gap-4">
-                                <div class="bg-purple-50 p-3 rounded-full text-purple-600 text-xl">✉️</div>
+                                <div class="bg-purple-50 p-3 rounded-full text-primary text-xl">✉️</div>
                                 <div>
-                                    <h4 class="font-bold text-[#3b1e5a]">Email Us</h4>
+                                    <h4 class="font-bold text-primary">Email Us</h4>
                                     <p class="text-gray-600 text-sm">mrcplabon@gmail.com</p>
                                 </div>
                             </div>
@@ -46,18 +46,17 @@ const Contact = () => {
                             <div class="flex items-center gap-4">
                                 <div class="bg-cyan-50 p-3 rounded-full text-cyan-600 text-xl">📍</div>
                                 <div>
-                                    <h4 class="font-bold text-[#3b1e5a]">Visit Office</h4>
+                                    <h4 class="font-bold text-primary">Visit Office</h4>
                                     <p class="text-gray-600 text-sm">House #00, Road #00, Sector #00, Uttara, Dhaka.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-[#3b1e5a] p-6 rounded-2xl shadow-md text-white">
+                        <div class="bg-primary p-6 rounded-2xl shadow-md text-white">
                             <h4 class="font-bold mb-4">Follow Our Styles</h4>
                             <div class="flex gap-4">
                                 <a href="#" class="bg-white/10 p-2 rounded hover:bg-white/20 transition">FB</a>
                                 <a href="#" class="bg-white/10 p-2 rounded hover:bg-white/20 transition">IG</a>
-                                <a href="#" class="bg-white/10 p-2 rounded hover:bg-white/20 transition">WA</a>
                             </div>
                         </div>
                     </div>

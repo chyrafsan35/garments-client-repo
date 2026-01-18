@@ -12,7 +12,7 @@ const OurStory = () => {
                     <div class="w-full h-80 bg-gray-200 rounded-2xl shadow-2xl overflow-hidden relative z-10">
                         <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&q=80&w=1000" alt="Fashion Workshop" class="w-full h-full object-cover" />
                     </div>
-                    <div class="absolute -bottom-8 -right-10 w-32 h-32 bg-purple-500 opacity-20 rounded-full z-0 opacity-30"></div>
+                    <div class="absolute -bottom-8 -right-10 w-32 h-32 bg-primary opacity-20 rounded-full z-0 opacity-30"></div>
                 </div>
 
                 <div class="space-y-6">
@@ -62,7 +62,7 @@ const OurStory = () => {
                             <div className='col-span-1  text-left'>
                                 <ScrollReveal direction="left">
                                     <div>
-                                        <h3 className="text-2xl font-bold text-primary mb-4 border-l-4 border-cyan-500 pl-3">Collections</h3>
+                                        <h3 className="text-2xl font-bold text-primary mb-4 border-l-4 border-secondary pl-3">Collections</h3>
                                         <ul className='space-y-4 text-xl font-semibold text-gray-700 list-none'>
                                             <li className=" flex items-center gap-2">
                                                 Men's Casual

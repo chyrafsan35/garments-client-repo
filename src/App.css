@@ -25,6 +25,13 @@
   --color-text: #FFFFFF;
 }
 
+@plugin "daisyui/theme" {
+  name: "swap";
+  --color-primary: #3B1E54;   
+  --color-secondary: #A3D0F7;
+  --color-text: #FFFFFF;
+}
+
 @theme {
   --font-pacifico: "Pacifico", cursive;
   --font-ubuntu: "Ubuntu", sans-serif;
